@@ -17,8 +17,9 @@ class PersonHoliday extends Model
         "type",
         "daytime",
         "status",
-    ],
-    $dates = [
+    ];
+
+    protected $dates = [
         "start",
         "end",
     ];

@@ -17,7 +17,9 @@ class Person extends Model
         "birthDate",
         "department",
         "maxAmountOfHolidays"
-    ],
-    $dates = ["birthDate"];
+    ];
+    protected $dates = [
+        "birthDate"
+    ];
 
 }
