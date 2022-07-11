@@ -23,6 +23,10 @@ class PersonHoliday extends Model
         "start",
         "end",
     ];
+    protected $casts = [
+        "start" => "date:Y-m-d",
+        "end" => "date:Y-m-d",
+    ];
 
     public function person()
     {

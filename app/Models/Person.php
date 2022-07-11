@@ -21,9 +21,13 @@ class Person extends Model
     protected $dates = [
         "birthDate"
     ];
+    protected $casts = [
+        "birthDate" => "date:Y-m-d",
+    ];
 
     public function holidays()
     {
         return $this->hasMany(PersonHoliday::class);
     }
+
 }

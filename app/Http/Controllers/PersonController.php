@@ -7,6 +7,6 @@ use App\Models\Person;
 class PersonController extends Controller
 {
     public function index(){
-        return response()->json((Person::all()));
+        return response()->json(Person::with(["holidays"])->get());
     }
 }
