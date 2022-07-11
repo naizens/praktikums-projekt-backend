@@ -19,8 +19,7 @@ class CreatePeopleTable extends Migration
             $table->string("lastName");
             $table->date("birthDate");
             $table->string("department");
-            $table->float("maxAmountOfHolidays");
-
+            $table->integer("maxAmountOfHolidays");
             $table->timestamps();
         });
     }
