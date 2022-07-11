@@ -22,4 +22,8 @@ class Person extends Model
         "birthDate"
     ];
 
+    public function holidays()
+    {
+        return $this->hasMany(PersonHoliday::class);
+    }
 }

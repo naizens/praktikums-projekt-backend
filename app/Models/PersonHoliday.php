@@ -23,4 +23,9 @@ class PersonHoliday extends Model
         "start",
         "end",
     ];
+
+    public function person()
+    {
+        return $this->belongsTo(Person::class);
+    }
 }
