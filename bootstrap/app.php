@@ -45,9 +45,16 @@ $app->singleton(
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    \Illuminate\Session\SessionManager::class,
     App\Console\Kernel::class
 );
+
+$app->singleton(Illuminate\Session\SessionManager::class, function () use ($app) {
+    return $app->loadComponent('session', Illuminate\Session\SessionServiceProvider::class, 'session');
+});
+
+$app->singleton('session.store', function () use ($app) {
+    return $app->loadComponent('session', Illuminate\Session\SessionServiceProvider::class, 'session.store');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +68,8 @@ $app->singleton(
 */
 
 $app->configure('app');
-$app->configure('out');
+$app->configure('auth');
+$app->configure('database');
 $app->configure('session');
 
 /*
@@ -95,7 +103,7 @@ $app->routeMiddleware([
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 /*

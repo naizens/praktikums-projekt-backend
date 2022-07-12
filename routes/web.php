@@ -18,10 +18,10 @@ $router->get('/', function () use ($router) {
 });
 $router->get("/people","PersonController@index");
 
-$router->get('/kalender', function () use ($router) {
-    dd(\Illuminate\Support\Facades\Auth::user());
+$router->get('/kalender', ['middleware' => 'auth',function () use ($router) {
+    dd(\Illuminate\Support\Facades\Auth::user()->userName);
     return view("index", []);
-});
+}]);
 
 $router->get("/login","ActionController@index");
 $router->post("/login","ActionController@submit");

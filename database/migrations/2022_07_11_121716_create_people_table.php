@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Person;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 class CreatePeopleTable extends Migration
@@ -26,6 +28,17 @@ class CreatePeopleTable extends Migration
             $table->integer("maxAmountOfHolidays");
             $table->timestamps();
         });
+
+        (new Person([
+            "userName"              => 'admin',
+            "eMail"                 => 'admin@localhost',
+            "password"              => Hash::make('12345'),
+            "firstName"             => 'Admin',
+            "lastName"              => 'Admin',
+            "birthDate"             => '1970-01-01',
+            "department"            => 'admin',
+            "maxAmountOfHolidays"   => 28
+        ]))->save();
     }
 
     /**

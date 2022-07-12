@@ -5,3 +5,5 @@ Homestead.yaml
 /node_modules
 .env
 .phpunit.result.cache
+database/database.sqlite
+storage/framework/sessions*

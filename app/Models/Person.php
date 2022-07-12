@@ -13,7 +13,7 @@ class Person extends Model
      * @var string[]
      */
     protected $fillable = [
-        "username",
+        "userName",
         "eMail",
         "password",
         "firstName",
