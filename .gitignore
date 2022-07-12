@@ -4,6 +4,7 @@ Homestead.json
 Homestead.yaml
 /node_modules
 .env
+/resources/views/test.html
 .phpunit.result.cache
 database/database.sqlite
 storage/framework/sessions*

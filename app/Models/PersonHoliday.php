@@ -12,6 +12,7 @@ class PersonHoliday extends Model
      * @var string[]
      */
     protected $fillable = [
+        "person_id",
         "start",
         "end",
         "type",

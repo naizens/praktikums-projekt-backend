@@ -16,15 +16,16 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get("/people","PersonController@index");
 
-$router->get('/kalender', ['middleware' => 'auth',function () use ($router) {
-    dd(\Illuminate\Support\Facades\Auth::user()->userName);
-    return view("index", []);
-}]);
+
+$router->group(['middleware' => 'auth'], function() use ($router) {
+    $router->get('/kalender', "PersonController@render");
+    $router->get("/people","PersonController@index");
+    $router->post('/kalender/submit', "PersonController@submit");
+});
 
 $router->get("/login","ActionController@index");
 $router->post("/login","ActionController@submit");
 
-$router->post("/kalender/submit","PersonController@submit");
+
 

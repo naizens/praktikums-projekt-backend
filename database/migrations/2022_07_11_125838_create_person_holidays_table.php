@@ -19,7 +19,7 @@ class CreatePersonHolidaysTable extends Migration
             $table->date("start");
             $table->date("end");
             $table->string("type");
-            $table->string("daytime");
+            $table->string("daytime")->nullable();
             $table->string("status")->default("registered");
             $table->timestamps();
         });

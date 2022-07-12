@@ -18,11 +18,8 @@ const months = ["Januar","Februar","März","April",
 // All the days of the Week
 const weekDays = ["Sunday", "Monday","Tuesday","Wednesday",
                 "Thursday","Friday","Saturday"];
-// Names of the Employees for testing
-const names = ["Niclas Heide"];
-const currentName = names[0];
-let name = "name" in localStorage? localStorage.getItem("names") : ""; 
-localStorage.setItem("name", currentName);
+
+const currentName = window.currentUser.firstName + " " + window.currentUser.lastName;
 // Departmens of netzfactor for testing
 const netzfactorDepartmens = ["web","media","app","network"];
 // Create a new Date object
@@ -42,7 +39,7 @@ let weekDay = getWeekDay(currentYear, monthIndex, currentDay);
 // Select everything in the DOM within the buttoncontainer
 let buttonContainer = document.querySelectorAll(".buttoncontainer");
 // Create jsonEventList if it doesn't exist or read it from localStorage
-let jsonEventList = "events" in localStorage? JSON.parse(localStorage.getItem('events')) : {};
+// let jsonEventList = "events" in localStorage? JSON.parse(localStorage.getItem('events')) : {};
 // create initials variable for the initials of the employees
 let initials;
 // Loop through the buttoncontainer and add the eventlistener to each button
@@ -138,12 +135,10 @@ function toggleModal () {
 const addButton = document.querySelector(".addButton");
 addButton.addEventListener("click", addEvent);
 
-const maxHolidayCount = 30;
+const maxHolidayCount = currentUser.maxAmountOfHolidays;
 
 function calculateHoliday(){
-    let user = jsonEventList[currentName];
-    let vacations = user.vacations;
-    let holidayCount = vacations.reduce(function(previous, current){
+    let holidayCount = holidays.reduce(function(previous, current){
         if(current.type === "halfDay"){
             return previous + 0.5;
         }
@@ -155,10 +150,8 @@ function calculateHoliday(){
     remainingDays.innerHTML = maxHolidayCount - holidayCount;
 }
 function workingDaysBetweenDates(startDate, endDate, getWorkingDays) {
-
     startDate = new Date(startDate);
     endDate = new Date(endDate);
-
     // Validate input
     if (endDate < startDate)
         return 0;
@@ -203,17 +196,10 @@ function addEvent() {
     let form = document.getElementById("vacationForm");
     let formData = new FormData(form)
     // Choose random name from the names array and random department from the netzfactorDepartmens array
-    let name = currentName;
-    let department = netzfactorDepartmens[Math.floor(Math.random() * netzfactorDepartmens.length)];
     // Get the values from the form
     let startDate = formData.get("startDate");
     let endDate = formData.get("endDate");
-    let holidayType = formData.get("holidaytype");
-    let dayTime = formData.get("daytime");
-    let holidayStatus = "registered";
 
-    // Create a new vacation array
-    let vacation = [];
     // If the startDate or endDate is not a valid date, alert the user
     if (startDate === "" || endDate === "") {
         alert("Bitte Datum eingeben");
@@ -227,42 +213,19 @@ function addEvent() {
     // Set the Status to true
     let status = true;
     // Loop trough all "keys" in the jsonEventList
-    Object.entries(jsonEventList).forEach(([key, value ]) => {
-        // If the key is the same as the Name of the Employee do the following
-        if (name === value.name) {
-            vacation = value.vacations;
-            vacation.forEach((entry) => {
-                if (!(entry.start > endDate || entry.end < startDate)) {
-                    status = false;
-                    alert("Dieser Mitarbeiter hat bereits einen Urlaub zwischen " + entry.start + " und " + entry.end);
+    holidays.forEach(function(entry) {
+        if(!(entry.start > endDate || entry.end < startDate)){
+            status = false;
+                    alert("Du hast bereits einen Urlaub zwischen " + entry.start + " und " + entry.end);
                     return;
                 }
-            })
-            // If the key is not the same as the Name of the Employee do the following
-            if(status){
-                console.log(vacation);
-            }
-        } 
-    }); 
-    // If the status is false do the following
+        });
     if (!status) {
         return;
     }
-    // If the name is not in the jsonEventList do the following
-    if(!(name in jsonEventList)) {
-        jsonEventList[name] = {
-            name: name,
-            department: department,
-        };
-    }
-    // Push the start date,end date and type to the vacation array
-    vacation.push({start: startDate, end: endDate, type: holidayType, status: holidayStatus, daytime: dayTime});
-    // Set the vacation array to the jsonEventList
-    jsonEventList[`${name}`].vacations = vacation;
-    // Save the jsonEventList to localStorage
-    localStorage.setItem("events", JSON.stringify(jsonEventList));
     // Reload the page
     placeDays(monthIndex, currentYear);
+    form.submit();
     // Close the modal
     toggleModal();
     calculateHoliday()
@@ -273,7 +236,6 @@ function loadEvents(startDate) {
         start,
         end,
         department,
-        vacations,
         holidayType,
         dayTime,
         status,
@@ -281,60 +243,105 @@ function loadEvents(startDate) {
 
     const currentDate = startDate.toJSON().slice(0, 10);
     // Loop trough all "keys" in the jsonEventList
-    Object.entries(jsonEventList).forEach(([key, value ]) => {
-        // Safe the name, department, vacations to the variables
-        name = value.name;
-        vacations = value.vacations;
-        department = value.department;
+    allHolidays.forEach(function(entry) {
+        name = entry.person.firstName + " " + entry.person.lastName;
+        department = entry.person.department;
 
-        // Create initials for the name
-        var index = name.indexOf(" ");
-        let firstName = name.substring(0, index);
-        let lastName = name.substring(index + 1);
-        initials = firstName.charAt(0) + lastName.charAt(0);
-        // Make the textColor black
+        let firstName = entry.person.firstName;
+        let lastName = entry.person.lastName;
+        initials = entry.person.firstName.charAt(0) + entry.person.lastName.charAt(0);
         let textColor = "black";
-        // Make the textColor white if the department is media or network
+
         if(department === "media" || department === "network") {
             textColor = "gray-100";
         }
-        // Loop trough all vacations
-        vacations.forEach(vacation => {
-            //Safe the start date, end date and type to the variables
-            start = vacation.start;
-            end = vacation.end;
-            holidayType = vacation.type;
-            status = vacation.status;
-            dayTime = vacation.daytime;
-            let bgColor = "bg-slate-50";
-            // If the currentdate is between the start and end date do the following
-            if(holidayType === "halfDay") {
-                if(dayTime === "morning") {
-                    bgColor = "bg-split-halfdayMorning";
-                } else {
-                    bgColor = "bg-split-halfdayAfternoon";
-                }
+        start = entry.start;
+        end = entry.end;
+        holidayType = entry.type;
+        status = entry.status;
+        dayTime = entry.daytime;
+        let bgColor = "bg-slate-50";
+        // If the currentdate is between the start and end date do the following
+        if(holidayType === "halfDay") {
+            if(dayTime === "morning") {
+                bgColor = "bg-split-halfdayMorning";
+            } else {
+                bgColor = "bg-split-halfdayAfternoon";
             }
-            //test
-            if(currentDate >= start && currentDate <= end) {
-                output.push(
-                    `
-                    <div data-initials="${initials + firstName + lastName}" class="before:content-[''] before:rounded-full before:block before:w-2 before:h-7 before:bg-${department} before:mr-2
-                    m-1 flex min-w-[55px] min-h-[34px] justify-center justify-self-center text-netzfactor font-bold ${bgColor} bg-auto px-1 py-0.5 rounded-md  scale-75 shadow-md
-                    hover-event relative hover:scale-100 md:hover:scale-125 border border-solid md:scale-100">
-                        <div class="flex text-lg">${initials}</div>
-                        <div class="hidden px-3 bg-slate-50 text-center py-2 shadow-md">
-                            <ul class="list-none">
-                                <li>${firstName} ${lastName}</li>
-                                <li>${status}</li>
-                            </ul>
-                        </div>
+        }
+        //test
+        if(currentDate >= start && currentDate <= end) {
+            output.push(
+                `
+                <div data-initials="${initials + firstName + lastName}" class="before:content-[''] before:rounded-full before:block before:w-2 before:h-7 before:bg-${department} before:mr-2
+                m-1 flex min-w-[55px] min-h-[34px] justify-center justify-self-center text-netzfactor font-bold ${bgColor} bg-auto px-1 py-0.5 rounded-md  scale-75 shadow-md
+                hover-event relative hover:scale-100 md:hover:scale-125 border border-solid md:scale-100">
+                    <div class="flex text-lg">${initials}</div>
+                    <div class="hidden px-3 bg-slate-50 text-center py-2 shadow-md">
+                        <ul class="list-none">
+                            <li>${firstName} ${lastName}</li>
+                            <li>${status}</li>
+                        </ul>
                     </div>
-                    `
-                )
-            };
-        });
+                </div>
+                `
+            )
+        };
     });
+    // Object.entries(jsonEventList).forEach(([key, value ]) => {
+    //     // Safe the name, department, vacations to the variables
+    //     name = value.name;
+    //     vacations = value.vacations;
+    //     department = value.department;
+
+    //     // Create initials for the name
+    //     var index = name.indexOf(" ");
+    //     let firstName = name.substring(0, index);
+    //     let lastName = name.substring(index + 1);
+    //     initials = firstName.charAt(0) + lastName.charAt(0);
+    //     // Make the textColor black
+    //     let textColor = "black";
+    //     // Make the textColor white if the department is media or network
+    //     if(department === "media" || department === "network") {
+    //         textColor = "gray-100";
+    //     }
+    //     // Loop trough all vacations
+    //     vacations.forEach(vacation => {
+    //         //Safe the start date, end date and type to the variables
+    //         start = vacation.start;
+    //         end = vacation.end;
+    //         holidayType = vacation.type;
+    //         status = vacation.status;
+    //         dayTime = vacation.daytime;
+    //         let bgColor = "bg-slate-50";
+    //         // If the currentdate is between the start and end date do the following
+    //         if(holidayType === "halfDay") {
+    //             if(dayTime === "morning") {
+    //                 bgColor = "bg-split-halfdayMorning";
+    //             } else {
+    //                 bgColor = "bg-split-halfdayAfternoon";
+    //             }
+    //         }
+    //         //test
+    //         if(currentDate >= start && currentDate <= end) {
+    //             output.push(
+    //                 `
+    //                 <div data-initials="${initials + firstName + lastName}" class="before:content-[''] before:rounded-full before:block before:w-2 before:h-7 before:bg-${department} before:mr-2
+    //                 m-1 flex min-w-[55px] min-h-[34px] justify-center justify-self-center text-netzfactor font-bold ${bgColor} bg-auto px-1 py-0.5 rounded-md  scale-75 shadow-md
+    //                 hover-event relative hover:scale-100 md:hover:scale-125 border border-solid md:scale-100">
+    //                     <div class="flex text-lg">${initials}</div>
+    //                     <div class="hidden px-3 bg-slate-50 text-center py-2 shadow-md">
+    //                         <ul class="list-none">
+    //                             <li>${firstName} ${lastName}</li>
+    //                             <li>${status}</li>
+    //                         </ul>
+    //                     </div>
+    //                 </div>
+    //                 `
+    //             )
+    //         };
+    //     });
+    // });
     // Return the output
     return output.length > 0 ? output : null;
 }
