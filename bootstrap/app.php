@@ -23,7 +23,7 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
 $app->withEloquent();
 
@@ -45,6 +45,7 @@ $app->singleton(
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
+    \Illuminate\Session\SessionManager::class,
     App\Console\Kernel::class
 );
 
@@ -60,6 +61,8 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('out');
+$app->configure('session');
 
 /*
 |--------------------------------------------------------------------------
@@ -76,9 +79,9 @@ $app->middleware([
     \Illuminate\Session\Middleware\StartSession::class
 ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

@@ -19,10 +19,12 @@ $router->get('/', function () use ($router) {
 $router->get("/people","PersonController@index");
 
 $router->get('/kalender', function () use ($router) {
+    dd(\Illuminate\Support\Facades\Auth::user());
     return view("index", []);
 });
 
 $router->get("/login","ActionController@index");
+$router->post("/login","ActionController@submit");
 
 $router->post("/kalender/submit","PersonController@submit");
 

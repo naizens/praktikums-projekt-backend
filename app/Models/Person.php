@@ -36,4 +36,7 @@ class Person extends Model
     public function setPassword(string $value){
         $this->attributes["password"] = Hash::make($value);
     }
+    public function checkPassword(string $password){
+        return Hash::check($password, $this->password);
+    }
 }
