@@ -288,61 +288,6 @@ function loadEvents(startDate) {
             )
         };
     });
-    // Object.entries(jsonEventList).forEach(([key, value ]) => {
-    //     // Safe the name, department, vacations to the variables
-    //     name = value.name;
-    //     vacations = value.vacations;
-    //     department = value.department;
-
-    //     // Create initials for the name
-    //     var index = name.indexOf(" ");
-    //     let firstName = name.substring(0, index);
-    //     let lastName = name.substring(index + 1);
-    //     initials = firstName.charAt(0) + lastName.charAt(0);
-    //     // Make the textColor black
-    //     let textColor = "black";
-    //     // Make the textColor white if the department is media or network
-    //     if(department === "media" || department === "network") {
-    //         textColor = "gray-100";
-    //     }
-    //     // Loop trough all vacations
-    //     vacations.forEach(vacation => {
-    //         //Safe the start date, end date and type to the variables
-    //         start = vacation.start;
-    //         end = vacation.end;
-    //         holidayType = vacation.type;
-    //         status = vacation.status;
-    //         dayTime = vacation.daytime;
-    //         let bgColor = "bg-slate-50";
-    //         // If the currentdate is between the start and end date do the following
-    //         if(holidayType === "halfDay") {
-    //             if(dayTime === "morning") {
-    //                 bgColor = "bg-split-halfdayMorning";
-    //             } else {
-    //                 bgColor = "bg-split-halfdayAfternoon";
-    //             }
-    //         }
-    //         //test
-    //         if(currentDate >= start && currentDate <= end) {
-    //             output.push(
-    //                 `
-    //                 <div data-initials="${initials + firstName + lastName}" class="before:content-[''] before:rounded-full before:block before:w-2 before:h-7 before:bg-${department} before:mr-2
-    //                 m-1 flex min-w-[55px] min-h-[34px] justify-center justify-self-center text-netzfactor font-bold ${bgColor} bg-auto px-1 py-0.5 rounded-md  scale-75 shadow-md
-    //                 hover-event relative hover:scale-100 md:hover:scale-125 border border-solid md:scale-100">
-    //                     <div class="flex text-lg">${initials}</div>
-    //                     <div class="hidden px-3 bg-slate-50 text-center py-2 shadow-md">
-    //                         <ul class="list-none">
-    //                             <li>${firstName} ${lastName}</li>
-    //                             <li>${status}</li>
-    //                         </ul>
-    //                     </div>
-    //                 </div>
-    //                 `
-    //             )
-    //         };
-    //     });
-    // });
-    // Return the output
     return output.length > 0 ? output : null;
 }
 
