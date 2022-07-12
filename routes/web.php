@@ -17,3 +17,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 $router->get("/people","PersonController@index");
+
+$router->get('/kalender', function () use ($router) {
+    return view("index", []);
+});
+
+$router->get("/login","ActionController@index");
+
+$router->post("/kalender/submit","PersonController@submit");
+
