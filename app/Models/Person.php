@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 class Person extends Model
 {
@@ -12,6 +13,9 @@ class Person extends Model
      * @var string[]
      */
     protected $fillable = [
+        "username",
+        "eMail",
+        "password",
         "firstName",
         "lastName",
         "birthDate",
@@ -29,5 +33,7 @@ class Person extends Model
     {
         return $this->hasMany(PersonHoliday::class);
     }
-
+    public function setPassword(string $value){
+        $this->attributes["password"] = Hash::make($value);
+    }
 }
