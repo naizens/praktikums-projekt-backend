@@ -10,7 +10,7 @@ function getClassName(department) {
         "network": "bg-network",
         "app": "bg-app"
     }[department];
-} 
+}
 //List of Months that exist in the year
 const months = ["Januar","Februar","März","April",
                 "Mai","Juni","Juli","August","September",
@@ -52,7 +52,7 @@ buttonContainer.forEach((entry) =>{
         } else {
             menu.classList.add("hidden");
         }
-    });         
+    });
 });
 //Select the today button and add the eventlistener to it
 const thisMonthButton = document.querySelectorAll(".thisMonth");
@@ -196,11 +196,9 @@ function addEvent() {
     // Get the element vacationForm and create a new FormData object
     let form = document.getElementById("vacationForm");
     let formData = new FormData(form)
-    // Choose random name from the names array and random department from the netzfactorDepartmens array
     // Get the values from the form
     let startDate = formData.get("startDate");
     let endDate = formData.get("endDate");
-
     // If the startDate or endDate is not a valid date, alert the user
     if (startDate === "" || endDate === "") {
         alert("Bitte Datum eingeben");
@@ -233,8 +231,7 @@ function addEvent() {
 }
 // Function for loading the events from the localstorage
 function loadEvents(startDate) {
-    let name,
-        start,
+    let start,
         end,
         department,
         holidayType,
@@ -243,9 +240,8 @@ function loadEvents(startDate) {
         output = [];
 
     const currentDate = startDate.toJSON().slice(0, 10);
-    // Loop trough all "keys" in the jsonEventList
+    // Loop trough all Holidays in the Database
     allHolidays.forEach(function(entry) {
-        name = entry.person.firstName + " " + entry.person.lastName;
         department = entry.person.department;
 
         let firstName = entry.person.firstName;
@@ -299,12 +295,12 @@ function placeDays(monthIndex, year) {
     // Start-Datum mit Jahr, Monat und dem 1. Tag
     const startDate = new Date(Date.UTC(year, monthIndex, 1));
 
-    // End-Datum, der "Nullte Tag" des folgenden Monats, ein kleiner Trick um einen Tag in die 
+    // End-Datum, der "Nullte Tag" des folgenden Monats, ein kleiner Trick um einen Tag in die
     // Vergangenheit zu springen und so das richtige End-Datum des Monats zu erhalten.
     const endDate = new Date(Date.UTC(year, monthIndex + 1, 0));
 
     // Wenn das Start-Datum nicht bei Montag anfängt, dann gehen wir die notwendigen Tage mit einem
-    // negativen Wert bei der `setDate` methode zurück. Das Problem hierbei: JavaScript bietet mit 
+    // negativen Wert bei der `setDate` methode zurück. Das Problem hierbei: JavaScript bietet mit
     // `getDay()` zwar eine Möglichkeit an den Wochentag als nummerischen Wert zu erhalten, nutzt
     // allerdings die folgenden Werte:
     //      0 = Sonntag
@@ -317,23 +313,23 @@ function placeDays(monthIndex, year) {
     // da wir allerdings bei Montag anfangen möchten, müssen wir diese Werte sortieren, und können
     // dadurch die Anzahl der vorherigen Tage ermitteln (-1, da wir beim aktuellen startDate
     // Objekt in die Vergangenheit springen möchten und daher 0-index basiert arbeiten):
-    
+
     if (startDate.getDay() !== 1) {
         startDate.setDate(-([1, 2, 3, 4, 5, 6, 0].indexOf(startDate.getDay()) - 1));
     }
     // Ähnlich können wir auch das Ende unseres Kalenders berechnen, müssen allerdings die Anzahl
-    // der nachfolgenden Tage (bis Sonntag) auf das aktuelle End-Datum draufrechnen. Um diese Zahl 
+    // der nachfolgenden Tage (bis Sonntag) auf das aktuelle End-Datum draufrechnen. Um diese Zahl
     // zu ermitteln, rechnen wir die Position in unserem "sortierten Wochentag-array" gegen die
     // Gesamtanzahl der Wochentage. (7, allerdings 0-index basiert... also 6).
     if (endDate.getDay() !== 0) {
         endDate.setDate(
-            endDate.getDate() + 
+            endDate.getDate() +
             (6 - [1, 2, 3, 4, 5, 6, 0].indexOf(endDate.getDay()))
         );
     }
 
     // Jetzt wo startDate und endDate den Kalender des entsprechenden Monats enthält + die Wochen-
-    // tage am Anfang sowie am Ende ergänzt haben, können wir mit einem kleinen Trick sämtliche 
+    // tage am Anfang sowie am Ende ergänzt haben, können wir mit einem kleinen Trick sämtliche
     // Daten in einer einzigen While Schleife ausgeben:
     // Die `toJSON` Methode gibt einen DateTime String zurück, die ersten 10 Zeichen enthalten das
     // Datum als "[JAHR]-[MONAT]-[TAG]", welches wir mit `≤` gut mit dem Ende vergleichen können:
@@ -360,31 +356,18 @@ function placeDays(monthIndex, year) {
 
         // HTML Inhalt
         if(isWeekEnd && current) {
-            if(startDate.getDay() === 6) {
-                output.push(`
-                <div class="weekend col-span-1 border border-slate-300 bg-slate-100 rounded-md overflow-hidden">
-                    <div class="p-1 bg-slate-100 text-gray-300">
-                        <div class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full">
-                            ${dayFormat}
-                        </div>
-                    </div>
-                    <div class="py-1 min-h-[9rem] break-words">
+            output.push(
+            `
+            <div class="weekend col-span-1 border border-slate-300 bg-slate-100 rounded-md overflow-hidden">
+                <div class="p-1 bg-slate-100 text-gray-300">
+                    <div class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full">
+                        ${dayFormat}
                     </div>
                 </div>
-                `);
-            } else {
-                output.push(`
-                <div class="weekend col-span-1 border border-slate-300 bg-slate-100 rounded-md overflow-hidden">
-                    <div class="p-1 bg-slate-100 text-gray-300">
-                        <div class="w-8 h-8 m-1 pt-0.5 truncate text-2xl text-center font-medium rounded-full">   
-                            ${dayFormat}
-                        </div>
-                    </div>
-                    <div class="py-1 min-h-[9rem] break-words">
-                    </div>
+                <div class="py-1 min-h-[9rem] break-words">
                 </div>
-                `);
-            }
+            </div>
+            `);
         } else {
             output.push(
             current?
@@ -432,8 +415,8 @@ function placeDays(monthIndex, year) {
                     }
             });
         });
-        
-        
+
+
     });
 }
 
