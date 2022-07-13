@@ -14,6 +14,34 @@
         window.allHolidays = {{ Illuminate\Support\Js::from($allHolidays) }};
     </script>
     <style>
+        /* For Firefox Browser */
+        html {
+            scrollbar-width: auto;
+            scrollbar-color: #004B7C #f7f4ed;
+        }
+
+        /* For Chrome, EDGE, Opera, Others */
+
+        .scrollbar::-webkit-scrollbar {
+            width: 13px;
+            height: 20px;
+        }
+
+        .scrollbar::-webkit-scrollbar-track {
+            border-radius: 100vh;
+            background: #f7f4ed;
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb {
+            background: #004B7C;
+            border-radius: 100vh;
+            border: 3px solid #f6f7ed;
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #0068AD;
+        }
+    </style>
 </head>
 <body class="scrollbar bg-white">
 
@@ -223,33 +251,5 @@
 <script type="text/javascript" async src="/js/script.js"></script>
 </body>
 
-<style>
-/* For Firefox Browser */
-html {
-    scrollbar-width: auto;
-    scrollbar-color: #004B7C #f7f4ed;
-}
 
-/* For Chrome, EDGE, Opera, Others */
-
-.scrollbar::-webkit-scrollbar {
-    width: 13px;
-    height: 20px;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-    border-radius: 100vh;
-    background: #f7f4ed;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-    background: #004B7C;
-    border-radius: 100vh;
-    border: 3px solid #f6f7ed;
-}
-
-.scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #0068AD;
-}
-</style>
 </html>
