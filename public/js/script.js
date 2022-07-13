@@ -16,7 +16,6 @@ function getClassName(department) {
 const months = ["Januar","Februar","März","April",
                 "Mai","Juni","Juli","August","September",
                 "Oktober","November","Dezember"];
-
 const currentUser = window.currentUser.firstName + " " + window.currentUser.lastName;
 document.querySelector("#user").innerHTML = currentUser;
 // Create a new Date object
@@ -27,13 +26,10 @@ let currentYear = date.getFullYear();
 let monthIndex = date.getMonth();
 //get the string for the current month
 let currentMonth = months[monthIndex];
-
-// Select everything in the DOM within the buttoncontainer
-let buttonContainer = document.querySelectorAll(".buttoncontainer");
-// Create jsonEventList if it doesn't exist or read it from localStorage
-// let jsonEventList = "events" in localStorage? JSON.parse(localStorage.getItem('events')) : {};
 // create initials variable for the initials of the employees
 let initials;
+// Select everything in the DOM within the buttoncontainer
+let buttonContainer = document.querySelectorAll(".buttoncontainer");
 // Loop through the buttoncontainer and add the eventlistener to each button
 buttonContainer.forEach((entry) =>{
     entry.querySelector('.viewButton').addEventListener('click', () => {
@@ -122,13 +118,11 @@ function toggleModal () {
     body.classList.toggle('overflow-hidden');
 }
 // End of Modal Part ---------------------------------------------------------
-
 // Select the add button and add the eventlistener to it
 const addButton = document.querySelector(".addButton");
 addButton.addEventListener("click", addEvent);
 
 const maxHolidayCount = currentUser.maxAmountOfHolidays;
-
 function calculateHoliday(){
     let holidayCount = holidays.reduce(function(previous, current){
         if(current.type === "halfDay"){
@@ -147,14 +141,12 @@ function workingDaysBetweenDates(startDate, endDate, getWorkingDays) {
     // Validate input
     if (endDate < startDate)
         return 0;
-
     // Calculate days between dates
     const millisecondsPerDay = 86400 * 1000; // Day in milliseconds
     startDate.setHours(0,0,0,1);  // Start just after midnight
     endDate.setHours(23,59,59,999);  // End just before midnight
     let diff = endDate - startDate;  // Milliseconds between datetime objects
     let days = Math.ceil(diff / millisecondsPerDay);
-
     if(getWorkingDays){
         // Subtract two weekend days for every week in between
         let weeks = Math.floor(days / 7);
@@ -178,10 +170,7 @@ function workingDaysBetweenDates(startDate, endDate, getWorkingDays) {
     }
     return days;
 }
-
 calculateHoliday();
-// workingDaysBetweenDates(start_date, end_date, false);
-
 // Function for adding Events with the Modal
 function addEvent() {
     // Get the element vacationForm and create a new FormData object
@@ -214,36 +203,28 @@ function addEvent() {
         return;
     }
     // Reload the page
-    placeDays(monthIndex, currentYear);
     form.submit();
+    placeDays(monthIndex, currentYear);
     // Close the modal
     toggleModal();
     calculateHoliday()
 }
 // Function for loading the events from the localstorage
 function loadEvents(startDate) {
-    let start,
-        end,
-        department,
-        holidayType,
-        dayTime,
-        status,
-        output = [];
-
+    let output = [];
     const currentDate = startDate.toJSON().slice(0, 10);
-    // Loop trough all Holidays in the Database
+    // Loop through all Holidays in the Database
     allHolidays.forEach(function(entry) {
-        department = entry.person.department;
-
-        let firstName = entry.person.firstName;
-        let lastName = entry.person.lastName;
+        const department = entry.person.department;
+        const firstName = entry.person.firstName;
+        const lastName = entry.person.lastName;
         initials = entry.person.firstName.charAt(0) + entry.person.lastName.charAt(0);
 
-        start = entry.start;
-        end = entry.end;
-        holidayType = entry.type;
-        status = entry.status;
-        dayTime = entry.daytime;
+        const start = entry.start;
+        const end = entry.end;
+        const holidayType = entry.type;
+        const status = entry.status;
+        const dayTime = entry.daytime;
         let bgColor = "bg-slate-50";
         // If the currentdate is between the start and end date do the following
         if(holidayType === "halfDay") {
@@ -274,18 +255,14 @@ function loadEvents(startDate) {
     });
     return output.length > 0 ? output : null;
 }
-
-
 // Get all the Dates + the Weekday
 function placeDays(monthIndex, year) {
     document.querySelector("#days").innerHTML = "";
     // Start-Datum mit Jahr, Monat und dem 1. Tag
     const startDate = new Date(Date.UTC(year, monthIndex, 1));
-
     // End-Datum, der "Nullte Tag" des folgenden Monats, ein kleiner Trick um einen Tag in die
     // Vergangenheit zu springen und so das richtige End-Datum des Monats zu erhalten.
     const endDate = new Date(Date.UTC(year, monthIndex + 1, 0));
-
     // Wenn das Start-Datum nicht bei Montag anfängt, dann gehen wir die notwendigen Tage mit einem
     // negativen Wert bei der `setDate` methode zurück. Das Problem hierbei: JavaScript bietet mit
     // `getDay()` zwar eine Möglichkeit an den Wochentag als nummerischen Wert zu erhalten, nutzt
@@ -300,7 +277,6 @@ function placeDays(monthIndex, year) {
     // da wir allerdings bei Montag anfangen möchten, müssen wir diese Werte sortieren, und können
     // dadurch die Anzahl der vorherigen Tage ermitteln (-1, da wir beim aktuellen startDate
     // Objekt in die Vergangenheit springen möchten und daher 0-index basiert arbeiten):
-
     if (startDate.getDay() !== 1) {
         startDate.setDate(-([1, 2, 3, 4, 5, 6, 0].indexOf(startDate.getDay()) - 1));
     }
@@ -314,7 +290,6 @@ function placeDays(monthIndex, year) {
             (6 - [1, 2, 3, 4, 5, 6, 0].indexOf(endDate.getDay()))
         );
     }
-
     // Jetzt wo startDate und endDate den Kalender des entsprechenden Monats enthält + die Wochen-
     // tage am Anfang sowie am Ende ergänzt haben, können wir mit einem kleinen Trick sämtliche
     // Daten in einer einzigen While Schleife ausgeben:
@@ -324,23 +299,19 @@ function placeDays(monthIndex, year) {
     const until = endDate.toJSON().slice(0, 10);        // Da sich endDate nicht ändern, können wir es als Konstante festlegen
     let current;
     while(startDate.toJSON().slice(0, 10) <= until) {
-
         // Der aktuelle Monat / das aktuelle Jahr, basierend auf die Funktions-Argumente
         current = startDate.getMonth() === monthIndex && startDate.getFullYear() === year;
         const isWeekEnd = startDate.getDay() === 6 || startDate.getDay() === 0;
-
         // Die folgende Funktion "übersetzt" das aktuelle Date-Object auf Österreichisch (um die Kollegen zu ärgern).
         // Intl.DateTimeFormat -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
         const dayFormat = new Intl.DateTimeFormat('de-AT', {
             day: 'numeric',
         }).format(startDate);
-
         let events;
 
         if (current) {
             events = loadEvents(startDate);
         }
-
         // HTML Inhalt
         if(isWeekEnd && current) {
             output.push(
@@ -402,11 +373,8 @@ function placeDays(monthIndex, year) {
                     }
             });
         });
-
-
     });
 }
-
 function setNextMonth() {
     if (monthIndex === 11) {
         monthIndex = 0;
@@ -418,7 +386,6 @@ function setNextMonth() {
     document.querySelector("#days").innerHTML = "";
     placeDays(monthIndex, currentYear);
 }
-
 function setPreviousMonth() {
     if (monthIndex === 0) {
         monthIndex = 11;
