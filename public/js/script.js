@@ -3,8 +3,9 @@
 // Ignore the following lines, they are just for adding the custom colors
 function getClassName(department) {
     return {
-        "netzfactor": "bg-netzfactor-light",
-        "netzfactor": "bg-netzfactor-dark",
+        "netzfactor-light": "bg-netzfactor-light",
+        "netzfactor-dark": "bg-netzfactor-dark",
+        "netzfactor": "bg-netzfactor",
         "web": "bg-web",
         "media": "bg-media",
         "network": "bg-network",
@@ -15,28 +16,18 @@ function getClassName(department) {
 const months = ["Januar","Februar","März","April",
                 "Mai","Juni","Juli","August","September",
                 "Oktober","November","Dezember"];
-// All the days of the Week
-const weekDays = ["Sunday", "Monday","Tuesday","Wednesday",
-                "Thursday","Friday","Saturday"];
 
 const currentUser = window.currentUser.firstName + " " + window.currentUser.lastName;
 document.querySelector("#user").innerHTML = currentUser;
-// Departmens of netzfactor for testing
-const netzfactorDepartmens = ["web","media","app","network"];
 // Create a new Date object
 let date = new Date();
 // Get the Current year
 let currentYear = date.getFullYear();
-// Get the Current day
-let currentDay = date.getDate();
 //get the current month
 let monthIndex = date.getMonth();
 //get the string for the current month
 let currentMonth = months[monthIndex];
-// Get the number of days of the month
-let daysInCurrentMonth = getDaysInMonth(currentYear, monthIndex);
-// Get the weekDay which is today
-let weekDay = getWeekDay(currentYear, monthIndex, currentDay);
+
 // Select everything in the DOM within the buttoncontainer
 let buttonContainer = document.querySelectorAll(".buttoncontainer");
 // Create jsonEventList if it doesn't exist or read it from localStorage
@@ -158,20 +149,20 @@ function workingDaysBetweenDates(startDate, endDate, getWorkingDays) {
         return 0;
 
     // Calculate days between dates
-    var millisecondsPerDay = 86400 * 1000; // Day in milliseconds
+    const millisecondsPerDay = 86400 * 1000; // Day in milliseconds
     startDate.setHours(0,0,0,1);  // Start just after midnight
     endDate.setHours(23,59,59,999);  // End just before midnight
-    var diff = endDate - startDate;  // Milliseconds between datetime objects
-    var days = Math.ceil(diff / millisecondsPerDay);
+    let diff = endDate - startDate;  // Milliseconds between datetime objects
+    let days = Math.ceil(diff / millisecondsPerDay);
 
     if(getWorkingDays){
         // Subtract two weekend days for every week in between
-        var weeks = Math.floor(days / 7);
+        let weeks = Math.floor(days / 7);
         days = days - (weeks * 2);
 
         // Handle special cases
-        var startDay = startDate.getDay();
-        var endDay = endDate.getDay();
+        const startDay = startDate.getDay();
+        const endDay = endDate.getDay();
 
         // Remove weekend not previously removed.
         if (startDay - endDay > 1)
@@ -247,11 +238,7 @@ function loadEvents(startDate) {
         let firstName = entry.person.firstName;
         let lastName = entry.person.lastName;
         initials = entry.person.firstName.charAt(0) + entry.person.lastName.charAt(0);
-        let textColor = "black";
 
-        if(department === "media" || department === "network") {
-            textColor = "gray-100";
-        }
         start = entry.start;
         end = entry.end;
         holidayType = entry.type;
@@ -283,7 +270,7 @@ function loadEvents(startDate) {
                 </div>
                 `
             )
-        };
+        }
     });
     return output.length > 0 ? output : null;
 }
@@ -418,17 +405,6 @@ function placeDays(monthIndex, year) {
 
 
     });
-}
-
-function getDaysInMonth(year, month) {
-    return new Date(year, month + 1, 0).getDate();
-}
-
-
-function getWeekDay(year, month, day) {
-    let date = new Date(year, month, day);
-
-    return weekDays[date.getDay()];
 }
 
 function setNextMonth() {
