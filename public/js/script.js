@@ -19,7 +19,8 @@ const months = ["Januar","Februar","März","April",
 const weekDays = ["Sunday", "Monday","Tuesday","Wednesday",
                 "Thursday","Friday","Saturday"];
 
-const currentName = window.currentUser.firstName + " " + window.currentUser.lastName;
+const currentUser = window.currentUser.firstName + " " + window.currentUser.lastName;
+document.querySelector("#user").innerHTML = currentUser;
 // Departmens of netzfactor for testing
 const netzfactorDepartmens = ["web","media","app","network"];
 // Create a new Date object
