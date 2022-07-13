@@ -13,7 +13,7 @@
         window.holidays = {{ Illuminate\Support\Js::from($holidays) }};
         window.allHolidays = {{ Illuminate\Support\Js::from($allHolidays) }};
     </script>
-    <script type="text/javascript" async src="/js/script.js"></script>
+    <style>
 </head>
 <body class="scrollbar bg-white">
 
@@ -220,6 +220,7 @@
         <p class="mt-8 text-center text-base text-gray-400">&copy; 2022</p>
     </div>
 </footer>
+<script type="text/javascript" async src="/js/script.js"></script>
 </body>
 
 <style>
