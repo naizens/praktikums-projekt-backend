@@ -17,7 +17,6 @@ const months = ["Januar","Februar","März","April",
                 "Mai","Juni","Juli","August","September",
                 "Oktober","November","Dezember"];
 const currentUser = window.currentUser.firstName + " " + window.currentUser.lastName;
-document.querySelector("#user").innerHTML = currentUser;
 // Create a new Date object
 let date = new Date();
 // Get the Current year
@@ -28,6 +27,8 @@ let monthIndex = date.getMonth();
 let currentMonth = months[monthIndex];
 // create initials variable for the initials of the employees
 let initials;
+// Place everything in the DOM
+render(monthIndex, currentYear)
 // Select everything in the DOM within the buttoncontainer
 let buttonContainer = document.querySelectorAll(".buttoncontainer");
 // Loop through the buttoncontainer and add the eventlistener to each button
@@ -63,10 +64,6 @@ thisMonthButton.forEach((entry) =>{
         }
     });
 });
-// Place the current month + year in the DOM in the topleft
-document.getElementById("month").innerHTML = currentMonth + " " + currentYear;
-// Place the days in the DOM
-placeDays(monthIndex, currentYear);
 //Select the next button and add the eventlistener to it
 const nextButtonClicked = document.getElementById("next")
 if (nextButtonClicked != null) {
@@ -400,4 +397,12 @@ function setPreviousMonth() {
     document.querySelector("#month").innerHTML = months[monthIndex] + " " + currentYear;
     document.querySelector("#days").innerHTML = "";
     placeDays(monthIndex, currentYear);
+}
+function render(month, year) {
+    // Place the current month + year in the DOM in the topleft
+    document.getElementById("month").innerHTML = currentMonth + " " + currentYear;
+    document.querySelector("#user").innerHTML = currentUser;
+    document.querySelector("#name").innerHTML = window.currentUser.firstName + " " + window.currentUser.lastName;
+    document.querySelector("#email").innerHTML = window.currentUser.eMail;
+    placeDays(month, year)
 }

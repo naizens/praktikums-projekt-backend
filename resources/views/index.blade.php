@@ -87,8 +87,8 @@
                               <img id="profilePicture" class="h-36 w-36 rounded-full ring-2 ring-offset-2 ring-web" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                           </div>
                           <div class="p-1 my-1 justify-self-center text-center">
-                              <h1 class="text-xl font-bold">Niclas Heide</h1>
-                              <h2 class="-mt-1 text-md">heide@netzfactor.de</h2>
+                              <h1 id="name" class="text-xl font-bold">Niclas Heide</h1>
+                              <h2 id="email" class="-mt-1 text-md">heide@netzfactor.de</h2>
                           </div>
                           <div class="my-1 border-b border-slate-200 w-60"></div>
                           <div class="text-center my-1 mx-14 p-0.5 bg-web rounded-md text-slate-900 font-medium">[NF]-Web</div>
