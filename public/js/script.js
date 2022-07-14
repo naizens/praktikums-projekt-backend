@@ -156,15 +156,12 @@ function workingDaysBetweenDates(startDate, endDate, getWorkingDays) {
         // Handle special cases
         const startDay = startDate.getDay();
         const endDay = endDate.getDay();
-
         // Remove weekend not previously removed.
         if (startDay - endDay > 1)
             days = days - 2;
-
         // Remove start day if span starts on Sunday but ends before Saturday
         if (startDay == 0 && endDay != 6)
             days = days - 1;
-
         // Remove end day if span ends on Saturday but starts after Sunday
         if (endDay == 6 && startDay != 0)
             days = days - 1;

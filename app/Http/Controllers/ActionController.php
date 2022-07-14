@@ -34,6 +34,9 @@ class ActionController extends Controller {
         $request->session()->forget('userSession');
         return redirect("/login");
     }
+    public function backToLogin() {
+        return view("login");
+    }
 
 
 }
