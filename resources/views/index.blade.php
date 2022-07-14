@@ -72,8 +72,40 @@
               </button>
           </div>
           <div class="hidden md:ml-4 md:flex md:items-center">
+              <button type="button" class="addEvent focus:outline-none ml-6 rounded-md border border-transparent bg-netzfactor py-2 px-4 text-sm font-medium text-white shadow-md hover:bg-netzfactor-light focus:ring-2 focus:ring-netzfactor focus:ring-offset-2">Urlaub Beantragen</button>
               <div class="ml-6 h-6 w-px bg-gray-300"></div>
-              <button type="button" class="addEvent focus:outline-none ml-6 rounded-md border border-transparent bg-netzfactor py-2 px-4 text-sm font-medium text-white shadow-md hover:bg-netzfactor-light focus:ring-2 focus:ring-netzfactor focus:ring-offset-2">Event Hinzufügen</button>
+
+              <div class="ml-6">
+                  <button id="profileButton" type="button" class="flex overflow-hidden p-1 rounded-full">
+                      <img class="h-11 w-11 rounded-full ring-2 ring-web" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                  </button>
+                  <!-- Dropdown for the Profile Button-->
+                  <div class="profileMenu hidden mr-1 border border-slate-300 focus:outline-none absolute right-0 mt-3 origin-top-right divide-y divide-gray-100 overflow-hidden rounded-md bg-white shadow-md ring-1 ring-black ring-opacity-5">
+
+                      <div class="p-1 my-1 grid justify-center w-72">
+                          <div class="p-1 self-center justify-self-center">
+                              <img id="profilePicture" class="h-36 w-36 rounded-full ring-2 ring-offset-2 ring-web" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                          </div>
+                          <div class="p-1 my-1 justify-self-center text-center">
+                              <h1 class="text-xl font-bold">Niclas Heide</h1>
+                              <h2 class="-mt-1 text-md">heide@netzfactor.de</h2>
+                          </div>
+                          <div class="my-1 border-b border-slate-200 w-60"></div>
+                          <div class="text-center my-1 mx-14 p-0.5 bg-web rounded-md text-slate-900 font-medium">[NF]-Web</div>
+                          <div class="my-1 border-b border-slate-200 w-60"></div>
+                      </div>
+                      <div class="p-1 hover:bg-slate-50" role="none">
+                          <a href="#" class="text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-0-item-0">Profil Verwalten</a>
+                      </div>
+                      <div class="p-1 hover:bg-slate-50" role="none">
+                          <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                          <a href="#" class="addEvent text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-0-item-1">Urlaub Beantragen</a>
+                      </div>
+                      <div class="p-1 hover:bg-slate-50" role="none">
+                          <a href="/logout" class=" text-gray-700 block px-4 py-2 text-sm" role="menuitem" tabindex="-1" id="menu-0-item-2">Ausloggen</a>
+                      </div>
+                      <!-- End of dropdown-->
+                  </div>
           </div>
           <div class="relative ml-6 md:hidden buttoncontainer">
               <button type="button" class="viewButton shadow-md -mx-2 flex items-center rounded-md border border-gray-300 p-2 text-gray-400 hover:text-gray-500" id="menu-0-button" aria-expanded="false" aria-haspopup="true">
