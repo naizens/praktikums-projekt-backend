@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use Illuminate\Support\Facades\Auth;
 
 class ActionController extends Controller {
 
@@ -11,7 +12,6 @@ class ActionController extends Controller {
     }
 
     public function submit(\Illuminate\Http\Request $request){
-        $inputs = $request->all();
         $user = Person::where(
             "userName", $request->input("username")
 
@@ -26,6 +26,13 @@ class ActionController extends Controller {
                 return redirect("/kalender");
             }
         }
+    }
+    public function logout(\Illuminate\Http\Request $request){
+        $user = Auth::user();
+        $user->session = null;
+        $user->save();
+        $request->session()->forget('userSession');
+        return redirect("/login");
     }
 
 

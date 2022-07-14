@@ -22,6 +22,7 @@ $router->group(['middleware' => 'auth'], function() use ($router) {
     $router->get('/kalender', "PersonController@render");
     $router->get("/people","PersonController@index");
     $router->post('/kalender/submit', "PersonController@submit");
+    $router->get("/logout", "ActionController@logout");
 });
 
 $router->get("/login","ActionController@index");
