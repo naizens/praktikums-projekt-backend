@@ -36,8 +36,12 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return redirect("/401", 401);
-            //return response("Test",401);
+            //return redirect("/401", 401);
+            return response(view("errors.4xx", [
+                "status"        =>  401,
+                "statusText"    => "Nicht Autorisiert.",
+                "extraText"     => "Du hast keinen Zugriff, da du nicht eingeloggt bist."
+            ]), 401);
         }
 
         return $next($request);
