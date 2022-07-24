@@ -23,7 +23,7 @@ class ActionController extends Controller {
                 $request->session()->put("userSession", $session);
                 $person->session = $session;
                 $person->save();
-                return redirect("/kalender");
+                return redirect("/main");
             }
         }
     }

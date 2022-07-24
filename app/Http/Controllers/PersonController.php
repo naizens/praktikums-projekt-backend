@@ -11,6 +11,40 @@ class PersonController extends Controller
     public function index(){
         return response()->json(PersonHoliday::where("person_id", Auth::user()->id)->get());
     }
+
+    public function renderMain(){
+        return view("main", [
+            "user" => Auth::user()
+        ]);
+    }
+    public function renderDashboard(){
+        return view("templates/dashboard", [
+            "user" => Auth::user()
+        ]);
+    }
+    public function renderCalendar(){
+        return view("templates/calendar", [
+            "user" => Auth::user(),
+            "holidays"=>PersonHoliday::where("person_id", Auth::user()->id)->get(),
+            "allHolidays"=>PersonHoliday::with("person")->get(),
+        ]);
+    }
+    public function renderProfile(){
+        return view("templates/profile", [
+            "user" => Auth::user()
+        ]);
+    }
+    public function renderEmployees(){
+        return view("templates/employees", [
+            "user" => Auth::user()
+        ]);
+    }
+    public function renderVacations(){
+        return view("templates/holidayAdministration", [
+            "user" => Auth::user()
+        ]);
+    }
+
     public function render(){
         return view("index", [
             "user"=>Auth::user(),
@@ -29,6 +63,6 @@ class PersonController extends Controller
             "daytime"=>$inputs["daytime"] ?? null
         ]);
         $holiday->save();
-        return redirect("/kalender");
+        return redirect("/calendar");
     }
 }

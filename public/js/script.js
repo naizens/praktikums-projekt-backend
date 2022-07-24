@@ -399,7 +399,6 @@ function render(month, year) {
     // Place the current month + year in the DOM in the topleft
     document.getElementById("month").innerHTML = currentMonth + " " + currentYear;
     document.querySelector("#user").innerHTML = currentUser;
-    document.querySelector("#name").innerHTML = window.currentUser.firstName + " " + window.currentUser.lastName;
-    document.querySelector("#email").innerHTML = window.currentUser.eMail;
+
     placeDays(month, year)
 }
