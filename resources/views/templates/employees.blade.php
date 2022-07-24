@@ -1,40 +1,5 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8" />
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Mitarbeiter</title>
-    <link href="/css/output.css" rel="stylesheet">
-    <link rel="icon" href="/img/kalender.png">
-    <style>
-        /* For Firefox Browser */
-        html {
-            scrollbar-width: auto;
-            scrollbar-color: #004B7C #f7f4ed;
-        }
-        /* For Chrome, EDGE, Opera, Others */
-        .scrollbar::-webkit-scrollbar {
-            width: 13px;
-            height: 13px;
-        }
-        .scrollbar::-webkit-scrollbar-track {
-            border-radius: 100vh;
-            background: #f7f4ed;
-        }
-        .scrollbar::-webkit-scrollbar-thumb {
-            background: #004B7C;
-            border-radius: 100vh;
-            border: 3px solid #f6f7ed;
-        }
-        .scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #0068AD;
-        }
-    </style>
-</head>
-
-<body class="h-full scrollbar bg-slate-50">
+@extends('layers.base')
+@section('content')
 <header class="z-20 h-20 flex bg-white items-center justify-between border-b border-gray-200 py-4 px-6 lg:flex-none">
     <div class="items-center">
         <h1 class="text-2xl font-semibold text-gray-900 border-b border-gray-300">
@@ -208,8 +173,4 @@
         </div>
     </div>
 </main>
-
-</body>
-
-
-</html>
+@endsection
