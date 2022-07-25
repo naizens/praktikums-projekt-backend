@@ -27,14 +27,30 @@ $router->group(['middleware' => 'auth'], function() use ($router) {
     $router->get('/employees', 'PersonController@renderEmployees');
     $router->get('/vacations', 'PersonController@renderVacations');
 
-    $router->get('/kalender', "PersonController@render");
     $router->get("/people","PersonController@index");
-    $router->post('/kalender/submit', "PersonController@submit");
     $router->get("/logout", "ActionController@logout");
 });
 
 $router->get("/login","ActionController@index");
 $router->post("/login","ActionController@submit");
 
+$router->get("/schoolholidays", function () {
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://ferien-api.de/api/v1/holidays/NW/2022",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+            "cache-control: no-cache",
+        ),
+    ));
+    $response = curl_exec($curl);
+    curl_close($curl);
 
+    return response()->json(json_decode($response));
+});
 

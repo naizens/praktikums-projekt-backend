@@ -13,7 +13,7 @@ class PersonController extends Controller
     }
 
     public function renderMain(){
-        return view("main", [
+        return view("/layers/base", [
             "user" => Auth::user()
         ]);
     }
@@ -45,13 +45,6 @@ class PersonController extends Controller
         ]);
     }
 
-    public function render(){
-        return view("index", [
-            "user"=>Auth::user(),
-            "holidays"=>PersonHoliday::where("person_id", Auth::user()->id)->get(),
-            "allHolidays"=>PersonHoliday::with("person")->get(),
-        ]);
-    }
 
     public function submit(\Illuminate\Http\Request $request){
         $inputs = $request->all();

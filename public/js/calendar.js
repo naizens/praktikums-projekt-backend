@@ -12,6 +12,16 @@ function getClassName(department) {
         "app": "bg-app"
     }[department];
 }
+let holidaysApi = "https://feiertage-api.de/api/?jahr=2022&nur_land=NW"
+
+
+async function getHolidays(url) {
+    return await fetch(url, {
+        method: "GET",
+    })
+        .then(response => response.json())
+}
+
 //List of Months that exist in the year
 const months = ["Januar","Februar","März","April",
                 "Mai","Juni","Juli","August","September",
@@ -27,6 +37,8 @@ let monthIndex = date.getMonth();
 let currentMonth = months[monthIndex];
 // create initials variable for the initials of the employees
 let initials;
+let schoolHolidays = null;
+let localHolidays = null;
 // Place everything in the DOM
 render(monthIndex, currentYear)
 // Select everything in the DOM within the buttoncontainer
@@ -41,11 +53,6 @@ buttonContainer.forEach((entry) =>{
             menu.classList.add("hidden");
         }
     });
-});
-const profileButton = document.querySelector("#profileButton");
-profileButton.addEventListener('click', () => {
-    let profile = document.querySelector(".profileMenu");
-    profile.classList.toggle('hidden');
 });
 //Select the today button and add the eventlistener to it
 const thisMonthButton = document.querySelectorAll(".thisMonth");
@@ -207,10 +214,33 @@ function addEvent() {
     toggleModal();
     calculateHoliday()
 }
+
 // Function for loading the events from the localstorage
-function loadEvents(startDate) {
+async function loadEvents(startDate) {
+    if(!schoolHolidays){
+        schoolHolidays = await getHolidays("/schoolholidays");
+    }
+
     let output = [];
     const currentDate = startDate.toJSON().slice(0, 10);
+
+
+    schoolHolidays.forEach(function(entry) {
+        let start = (new Date(entry.start)).toJSON().slice(0, 10);
+        let end = (new Date(entry.end)).toJSON().slice(0, 10);
+        let year = entry.year;
+        let name = entry.name.toUpperCase();
+
+        if(currentDate >= start && currentDate <= end) {
+            output.push(
+                `
+                <div class="w-full text-center font-semibold text-slate-500 my-1 bg-white rounded-md">${name}</div>
+                `
+            );
+        }
+
+    });
+
     // Loop through all Holidays in the Database
     allHolidays.forEach(function(entry) {
         const department = entry.person.department;
@@ -254,7 +284,7 @@ function loadEvents(startDate) {
     return output.length > 0 ? output : null;
 }
 // Get all the Dates + the Weekday
-function placeDays(monthIndex, year) {
+async function placeDays(monthIndex, year) {
     document.querySelector("#days").innerHTML = "";
     // Start-Datum mit Jahr, Monat und dem 1. Tag
     const startDate = new Date(Date.UTC(year, monthIndex, 1));
@@ -296,7 +326,12 @@ function placeDays(monthIndex, year) {
     const output = [];
     const until = endDate.toJSON().slice(0, 10);        // Da sich endDate nicht ändern, können wir es als Konstante festlegen
     let current;
+    if(!localHolidays){
+        localHolidays = await getHolidays("https://feiertage-api.de/api/?jahr=2022&nur_land=NW");
+    }
+
     while(startDate.toJSON().slice(0, 10) <= until) {
+
         // Der aktuelle Monat / das aktuelle Jahr, basierend auf die Funktions-Argumente
         current = startDate.getMonth() === monthIndex && startDate.getFullYear() === year;
         const isWeekEnd = startDate.getDay() === 6 || startDate.getDay() === 0;
@@ -308,9 +343,24 @@ function placeDays(monthIndex, year) {
         let events;
 
         if (current) {
-            events = loadEvents(startDate);
+            events = await loadEvents(startDate);
         }
         // HTML Inhalt
+        let dateOfHoliday = null;
+        let nameOfHoliday = null;
+
+
+        Object.entries(localHolidays).forEach(([key, value]) => {
+            dateOfHoliday = value.datum;
+            nameOfHoliday = key;
+
+        });
+
+
+        if(dateOfHoliday === startDate.toJSON().slice(0, 10)){
+            console.log(nameOfHoliday)
+        }
+
         if(isWeekEnd && current) {
             output.push(
             `

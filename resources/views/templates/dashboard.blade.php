@@ -86,29 +86,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script type="text/javascript" async src="/js/dashboard.js"></script>
-    <script>
-        const departments = ["Media", "App", "Web", "Network"]
-        const workers = [4, 5, 5, 7]
-        const colors = ["#ce4c34", "#e8bb40", "#00b0e6", "#08865f"]
-
-        new Chart("myChart", {
-            type: 'doughnut',
-            data: {
-                labels: departments,
-                datasets: [{
-                    backgroundColor: colors,
-                    data: workers
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Mitarbeiter pro Abteilung',
-                    fontSize: 30
-                }
-            }
-        })
-    </script>
 </main>
 @endsection

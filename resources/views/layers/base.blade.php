@@ -11,9 +11,10 @@
     <link rel="icon" href="/img/kalender.png">
     <script type="text/javascript">
         window.currentUser = {{ Illuminate\Support\Js::from($user) }};
-        window.holidays = {{ Illuminate\Support\Js::from($holidays) }};
-        window.allHolidays = {{ Illuminate\Support\Js::from($allHolidays) }};
+
     </script>
+    @section('scripts')
+    @show
     <style>
         /* For Firefox Browser */
         html {
@@ -40,14 +41,13 @@
     </style>
 </head>
 <body class="scrollbar bg-slate-50">
-<div class="flex">
+<div class="min-w-1/6 flex">
     @include('partials.navigation')
-    <div class="flex-1 overflow-y-auto scrollbar">
+    <div class="flex-1 h-screen overflow-y-scroll scrollbar">
         @section('content')
         @show()
     </div>
 </div>
-<script async src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<script type="text/javascript" async src="/js/script.js"></script>
+<script async src="/js/base.js"></script>
 </body>
 </html>

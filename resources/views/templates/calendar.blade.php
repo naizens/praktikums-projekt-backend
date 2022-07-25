@@ -1,4 +1,10 @@
 @extends('layers.base')
+@section('scripts')
+    <script>
+        window.holidays = {{ Illuminate\Support\Js::from($holidays) }};
+        window.allHolidays = {{ Illuminate\Support\Js::from($allHolidays) }};
+    </script>
+@endsection
 @section('content')
 <header class="z-20 h-20 flex bg-white items-center justify-between border-b border-gray-200 py-4 px-6 lg:flex-none">
     <div class="items-center">
@@ -168,4 +174,5 @@
         </div>
     </div>
 </main>
+<script type="text/javascript" async src="/js/calendar.js"></script>
 @endsection
