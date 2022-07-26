@@ -159,7 +159,6 @@ function workingDaysBetweenDates(startDate, endDate, getWorkingDays) {
         // Subtract two weekend days for every week in between
         let weeks = Math.floor(days / 7);
         days = days - (weeks * 2);
-
         // Handle special cases
         const startDay = startDate.getDay();
         const endDay = endDate.getDay();
@@ -228,7 +227,6 @@ async function loadEvents(startDate) {
     schoolHolidays.forEach(function(entry) {
         let start = (new Date(entry.start)).toJSON().slice(0, 10);
         let end = (new Date(entry.end)).toJSON().slice(0, 10);
-        let year = entry.year;
         let name = entry.name.toUpperCase();
 
         if(currentDate >= start && currentDate <= end) {
@@ -342,25 +340,18 @@ async function placeDays(monthIndex, year) {
         }).format(startDate);
         let events;
 
+
+        // HTML Inhalt
+
+        let isHoliday = null;
+        Object.entries(localHolidays).forEach(([key, value]) => {
+            if(startDate.toJSON().slice(0, 10) === value.datum){
+                isHoliday = key;
+            }
+        });
         if (current) {
             events = await loadEvents(startDate);
         }
-        // HTML Inhalt
-        let dateOfHoliday = null;
-        let nameOfHoliday = null;
-
-
-        Object.entries(localHolidays).forEach(([key, value]) => {
-            dateOfHoliday = value.datum;
-            nameOfHoliday = key;
-
-        });
-
-
-        if(dateOfHoliday === startDate.toJSON().slice(0, 10)){
-            console.log(nameOfHoliday)
-        }
-
         if(isWeekEnd && current) {
             output.push(
             `
@@ -377,17 +368,32 @@ async function placeDays(monthIndex, year) {
         } else {
             output.push(
             current?
-                `
-                <div class="col-span-1 border border-slate-300 bg-slate-100 rounded-md group hover:bg-blue-100 hover:shadow-lg active:bg-slate-100">
-                    <div class="p-1 bg-slate-100 rounded-t-md text-gray-500 group-hover:bg-blue-100 group-active:bg-slate-100">
-                        <div id="" class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full group-hover:text-blue-600 group-active:text-gray-500">
-                            ${dayFormat}
+                ` ${isHoliday?
+                    `<div class="col-span-1 border border-slate-300 bg-slate-50 rounded-md group">
+                        <div class="p-1 bg-slate-50 rounded-t-md text-gray-300">
+                            <div id="" class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full">
+                                ${dayFormat}
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap justify-evenly py-1 break-words mx-1">
+                            ${events? events.join(""): ""}
+                            <div class="w-full text-center font-semibold text-slate-500 my-1 bg-green-100 rounded-md">${isHoliday}</div>
                         </div>
                     </div>
-                    <div class="flex flex-wrap justify-evenly py-1 break-words mx-1">
-                        ${events? events.join(""): "&nbspKeine Einträge"}
+                    `
+                    :
+                    `<div class="col-span-1 border border-slate-300 bg-slate-100 rounded-md group hover:bg-blue-100 hover:shadow-lg active:bg-slate-100">
+                        <div class="p-1 bg-slate-100 rounded-t-md text-gray-500 group-hover:bg-blue-100 group-active:bg-slate-100">
+                            <div id="" class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full group-hover:text-blue-600 group-active:text-gray-500">
+                                ${dayFormat}
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap justify-evenly py-1 break-words mx-1">
+                            ${events? events.join(""): "&nbspKeine Einträge"}
+                        </div>
                     </div>
-                </div>
+                    `
+            }
             `:
                 `
                 <div class="col-span-1 border border-slate-300 bg-slate-50 rounded-md overflow-hidden">
