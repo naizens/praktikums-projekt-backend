@@ -82,8 +82,8 @@ if (lastButtonClicked != null) {
     });
 }
 // Modal Part ---------------------------------------------------------------
-let openmodal = document.querySelectorAll(".addEvent");
-openmodal.forEach((entry) =>{
+let openModal = document.querySelectorAll(".addEvent");
+openModal.forEach((entry) =>{
     entry.addEventListener("click", function (event) {
         event.preventDefault();
         toggleModal();
@@ -93,9 +93,9 @@ openmodal.forEach((entry) =>{
 const overlay = document.querySelector('.modal-overlay');
 overlay.addEventListener('click', toggleModal);
 // Select the modal-close buttons and add a eventlistener to them
-const closemodal = document.querySelectorAll('.modal-close')
-for (let i = 0; i < closemodal.length; i++) {
-    closemodal[i].addEventListener('click', toggleModal);
+const closeModal = document.querySelectorAll('.modal-close')
+for (let i = 0; i < closeModal.length; i++) {
+    closeModal[i].addEventListener('click', toggleModal);
 }
 // Toggle the modal when the user clicks on the button or anywhere outside of it
 document.onkeydown = function(evt) {
