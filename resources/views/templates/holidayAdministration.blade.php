@@ -1,20 +1,22 @@
 @extends('layers.base')
+@section('scripts')
+    <script>
+        window.allHolidays = {{ Illuminate\Support\Js::from($allHolidays) }};
+    </script>
+@endsection
 @section('content')
 <header class="z-20 h-20 flex bg-white items-center justify-between border-b border-gray-200 py-4 px-6 lg:flex-none">
     <div class="items-center">
-        <h1 class="text-2xl font-semibold text-gray-900 border-b border-gray-300">
-            <time id="month"></time>
-        </h1>
-        <h2 id="user" class="text-lg font-semibold text-gray-900"></h2>
+        <h1 class="text-2xl font-semibold text-gray-900 border-b border-gray-300">Urlaubsverwaltung</h1>
     </div>
 
     <div class="flex items-center">
         <div class="hidden md:flex md:items-center">
-            <button type="button" class="addEvent focus:outline-none rounded-md border border-transparent bg-netzfactor py-2 px-4 text-sm font-medium text-white shadow-md hover:bg-netzfactor-light focus:ring-2 focus:ring-netzfactor focus:ring-offset-2">Alle Akzeptieren</button>
+            <button id="acceptAll" type="button" class="addEvent focus:outline-none rounded-md border border-transparent bg-netzfactor py-2 px-4 text-sm font-medium text-white shadow-md hover:bg-netzfactor-light focus:ring-2 focus:ring-netzfactor focus:ring-offset-2">Alle Akzeptieren</button>
         </div>
         <div class="mx-6 h-6 w-px bg-gray-300"></div>
         <div class="hidden md:flex md:items-center">
-            <button type="button" class="addEvent focus:outline-none rounded-md border border-transparent bg-netzfactor py-2 px-4 text-sm font-medium text-white shadow-md hover:bg-netzfactor-light focus:ring-2 focus:ring-netzfactor focus:ring-offset-2">Alle Ablehnen</button>
+            <button id="declineAll" type="button" class="addEvent focus:outline-none rounded-md border border-transparent bg-netzfactor py-2 px-4 text-sm font-medium text-white shadow-md hover:bg-netzfactor-light focus:ring-2 focus:ring-netzfactor focus:ring-offset-2">Alle Ablehnen</button>
         </div>
 
         <div class="relative md:hidden buttoncontainer">

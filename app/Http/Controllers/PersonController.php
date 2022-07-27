@@ -41,7 +41,8 @@ class PersonController extends Controller
     }
     public function renderVacations(){
         return view("templates/holidayAdministration", [
-            "user" => Auth::user()
+            "user" => Auth::user(),
+            "allHolidays"=>PersonHoliday::with("person")->get()
         ]);
     }
 
