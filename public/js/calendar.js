@@ -354,15 +354,15 @@ async function placeDays(monthIndex, year) {
             output.push(
             current?
                 ` ${isHoliday?
-                    `<div class="col-span-1 border border-slate-300 bg-slate-50 rounded-md group">
-                        <div class="p-1 bg-slate-50 rounded-t-md text-gray-300">
+                    `<div class="col-span-1 border border-slate-300 bg-slate-100 rounded-md group">
+                        <div class="p-1 bg-slate-100 rounded-t-md text-gray-500">
                             <div id="" class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full">
                                 ${dayFormat}
                             </div>
                         </div>
                         <div class="flex flex-wrap justify-evenly py-1 break-words mx-1">
                             ${events? events.join(""): ""}
-                            <div class="w-full text-center font-semibold text-slate-500 my-1 bg-green-100 rounded-md">${isHoliday}</div>
+                            <div class="w-full text-center font-semibold text-slate-600 my-1 bg-green-200 rounded-md">${isHoliday}</div>
                         </div>
                     </div>
                     `
