@@ -242,6 +242,7 @@ async function loadEvents(startDate) {
         const status = entry.status;
         const dayTime = entry.daytime;
         let bgColor = "bg-slate-50";
+        let opacity = "opacity-50";
         // If the currentdate is between the start and end date do the following
         if(holidayType === "halfDay") {
             if(dayTime === "morning") {
@@ -250,18 +251,23 @@ async function loadEvents(startDate) {
                 bgColor = "bg-split-halfdayAfternoon";
             }
         }
+        if (status === "accepted") {
+            opacity = "opacity-100";
+        } else if (status === "registered") {
+            opacity = "opacity-60";
+        }
+        console.log(status);
         //test
         if(currentDate >= start && currentDate <= end) {
             output.push(
                 `
-                <div data-initials="${initials + firstName + lastName}" class="before:content-[''] before:rounded-full before:block before:w-2 before:h-7 before:bg-${department} before:mr-2
+                <div data-initials="${initials + firstName + lastName}" class="before:content-[''] ${opacity} before:rounded-full before:block before:w-2 before:h-7 before:bg-${department} before:mr-2
                 m-1 flex min-w-[55px] min-h-[34px] justify-center justify-self-center text-netzfactor font-bold ${bgColor} bg-auto px-1 py-0.5 rounded-md  scale-75 shadow-md
-                hover-event relative hover:scale-100 md:hover:scale-125 border border-solid md:scale-100">
+                hover-event relative hover:scale-100 border border-solid md:scale-100">
                     <div class="flex text-lg">${initials}</div>
                     <div class="hidden px-3 bg-slate-50 text-center py-2 shadow-md">
-                        <ul class="list-none">
+                        <ul class="list-none text-xl">
                             <li>${firstName} ${lastName}</li>
-                            <li>${status}</li>
                         </ul>
                     </div>
                 </div>
