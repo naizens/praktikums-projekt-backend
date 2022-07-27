@@ -11,7 +11,6 @@
     <link rel="icon" href="/img/kalender.png">
     <script type="text/javascript">
         window.currentUser = {{ Illuminate\Support\Js::from($user) }};
-
     </script>
     @section('scripts')
     @show
@@ -41,7 +40,7 @@
     </style>
 </head>
 <body class="scrollbar bg-slate-50">
-<div class="min-w-1/6 flex">
+<div class="flex">
     @include('partials.navigation')
     <div class="flex-1 h-screen overflow-y-scroll scrollbar">
         @section('content')
