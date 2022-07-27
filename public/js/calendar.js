@@ -12,16 +12,12 @@ function getClassName(department) {
         "app": "bg-app"
     }[department];
 }
-let holidaysApi = "https://feiertage-api.de/api/?jahr=2022&nur_land=NW"
-
-
 async function getHolidays(url) {
     return await fetch(url, {
         method: "GET",
     })
         .then(response => response.json())
 }
-
 //List of Months that exist in the year
 const months = ["Januar","Februar","März","April",
                 "Mai","Juni","Juli","August","September",
@@ -213,17 +209,13 @@ function addEvent() {
     toggleModal();
     calculateHoliday()
 }
-
 // Function for loading the events from the localstorage
 async function loadEvents(startDate) {
     if(!schoolHolidays){
         schoolHolidays = await getHolidays("/schoolholidays");
     }
-
     let output = [];
     const currentDate = startDate.toJSON().slice(0, 10);
-
-
     schoolHolidays.forEach(function(entry) {
         let start = (new Date(entry.start)).toJSON().slice(0, 10);
         let end = (new Date(entry.end)).toJSON().slice(0, 10);
@@ -236,9 +228,7 @@ async function loadEvents(startDate) {
                 `
             );
         }
-
     });
-
     // Loop through all Holidays in the Database
     allHolidays.forEach(function(entry) {
         const department = entry.person.department;
@@ -327,9 +317,7 @@ async function placeDays(monthIndex, year) {
     if(!localHolidays){
         localHolidays = await getHolidays("https://feiertage-api.de/api/?jahr=2022&nur_land=NW");
     }
-
     while(startDate.toJSON().slice(0, 10) <= until) {
-
         // Der aktuelle Monat / das aktuelle Jahr, basierend auf die Funktions-Argumente
         current = startDate.getMonth() === monthIndex && startDate.getFullYear() === year;
         const isWeekEnd = startDate.getDay() === 6 || startDate.getDay() === 0;
@@ -339,10 +327,7 @@ async function placeDays(monthIndex, year) {
             day: 'numeric',
         }).format(startDate);
         let events;
-
-
         // HTML Inhalt
-
         let isHoliday = null;
         Object.entries(localHolidays).forEach(([key, value]) => {
             if(startDate.toJSON().slice(0, 10) === value.datum){
@@ -410,7 +395,6 @@ async function placeDays(monthIndex, year) {
         startDate.setDate(startDate.getDate() + 1);
     }
     document.querySelector("#days").innerHTML += output.join("");
-
     const dataClass = document.querySelectorAll(`[data-initials]`);
         dataClass.forEach((current) => {
             current.addEventListener("pointerover", function () {
