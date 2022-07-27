@@ -145,13 +145,13 @@
 <!-- Kalender -->
     <div id="calendar" class="lg:flex lg:flex-auto lg:flex-col" >
         <div id="table-header" class="grid grid-cols-7 text-center text-2xl font-semibold text-black leading-6 lg:flex-none overflow-hidden gap-2 mt-2 mx-1">
-            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">M<span class="sr-only sm:not-sr-only">ontag</span></div>
-            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">D<span class="sr-only sm:not-sr-only">ienstag</span></div>
-            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">M<span class="sr-only sm:not-sr-only">ittwoch</span></div>
-            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">D<span class="sr-only sm:not-sr-only">onnerstag</span></div>
-            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">F<span class="sr-only sm:not-sr-only">reitag</span></div>
-            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">S<span class="sr-only sm:not-sr-only">amstag</span></div>
-            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">S<span class="sr-only sm:not-sr-only">onntag</span></div>
+            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">M<span class="sr-only sm:sr-only md:not-sr-only break-all">ontag</span></div>
+            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">D<span class="sr-only sm:sr-only md:not-sr-only break-all">ienstag</span></div>
+            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">M<span class="sr-only sm:sr-only md:not-sr-only break-all">ittwoch</span></div>
+            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">D<span class="sr-only sm:sr-only md:not-sr-only break-all">onnerstag</span></div>
+            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">F<span class="sr-only sm:sr-only md:not-sr-only break-all">reitag</span></div>
+            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">S<span class="sr-only sm:sr-only md:not-sr-only break-all">amstag</span></div>
+            <div class="bg-slate-50 border border-slate-300 py-3 rounded-md">S<span class="sr-only sm:sr-only md:not-sr-only break-all">onntag</span></div>
         </div>
         <div id="days" class="grid grid-cols-7 initial-scale gap-2 my-2 mx-1">
         </div>

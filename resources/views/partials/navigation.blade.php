@@ -3,7 +3,7 @@
         <div>
             <div class="py-7 h-20 md:p-4 border-b border-slate-200">
                 <a href="/main">
-                    <img class="mx-auto h-auto w-auto hidden md:flex" src="/img/nfLogo.svg" alt="[netfactor]">
+                    <img class="mx-auto h-auto w-auto hidden sm:hidden md:flex" src="/img/nfLogo.svg" alt="[netfactor]">
                     <img class="mx-auto h-auto w-auto md:hidden" src="/img/nfsmalllogo.svg" alt="[NF]">
                 </a>
             </div>
