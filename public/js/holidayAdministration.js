@@ -5,16 +5,14 @@ allHolidays.forEach(function(entry) {
     const department = entry.person.department;
     const firstName = entry.person.firstName;
     const lastName = entry.person.lastName;
-
     const start = entry.start;
     const end = entry.end;
     const holidayType = entry.type;
     const timeOfDay = entry.daytime;
     const status = entry.status;
 
-    
     const textColor = "text-" + department;
-    
+
     let typeText;
     let timeOfDayText;
     if(timeOfDay === "morning"){
@@ -43,8 +41,8 @@ allHolidays.forEach(function(entry) {
                     <div class="text-sm text-slate-400">Von <span class="text-slate-600 text-sm font-bold">${start}</span> bis <span class="text-slate-600 text-sm font-bold">${end}</span></div>
                 </div>
                 <div class="flex flex-col md:flex-row">
-                    <button class="pointer-events-auto my-1 mx-4 flex-none rounded-md py-[0.3125rem] px-2 font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50">Akzeptieren</button>
-                    <button class="pointer-events-auto my-1 mx-4 flex-none rounded-md py-[0.3125rem] px-2 font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50">Ablehnen</button>
+                    <button onclick="acceptRequest(${entry.person.id}, ${entry.id})" class="pointer-events-auto my-1 mx-4 flex-none rounded-md py-[0.3125rem] px-2 font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50">Akzeptieren</button>
+                    <button onclick="declineRequest(${entry.person.id}, ${entry.id})" class="pointer-events-auto my-1 mx-4 flex-none rounded-md py-[0.3125rem] px-2 font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50">Ablehnen</button>
                 </div>
             </div>
             `);
@@ -59,4 +57,38 @@ function checkStatus(status){
     } else {
         return false
     }
+}
+
+function acceptRequest(personID, holidayID){
+    const acceptForm = new FormData();
+    acceptForm.append("personID", personID);
+    acceptForm.append("holidayID", holidayID);
+    fetch("/acceptRequest", { 
+        method: "POST",
+        body: acceptForm
+    }).then(function(response){
+        console.log(response);
+    }
+    ).catch(function(error){
+        console.log(error);
+    }
+    );
+}
+        
+
+function declineRequest(personID, holidayID){
+    const declineForm = new FormData();
+    declineForm.append("personID", personID);
+    declineForm.append("holidayID", holidayID);
+    fetch("/declineRequest", { 
+        method: "POST",
+        body: declineForm
+    }).then(function(response){
+        if(response.ok){
+            console.log(response);
+        }
+    }).catch(function(error){
+        console.log(error);
+    });
+
 }

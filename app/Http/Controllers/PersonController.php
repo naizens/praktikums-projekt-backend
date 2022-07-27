@@ -46,7 +46,6 @@ class PersonController extends Controller
         ]);
     }
 
-
     public function submit(\Illuminate\Http\Request $request){
         $inputs = $request->all();
         $holiday = new PersonHoliday([
@@ -58,5 +57,19 @@ class PersonController extends Controller
         ]);
         $holiday->save();
         return redirect("/calendar");
+    }
+
+    public function acceptVacation(\Illuminate\Http\Request $request){
+        $inputs = $request->all();
+        $holiday = PersonHoliday::find($inputs["holidayID"]);
+        $holiday->status = "accepted";
+        $holiday->save();
+        return redirect("/vacations");
+    }
+    public function declineVacation(\Illuminate\Http\Request $request){
+        $inputs = $request->all();
+        $holiday = PersonHoliday::find($inputs["holidayID"]);
+        $holiday->delete();
+        return redirect("/vacations");
     }
 }
