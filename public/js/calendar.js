@@ -256,7 +256,6 @@ async function loadEvents(startDate) {
         } else if (status === "registered") {
             opacity = "opacity-60";
         }
-        console.log(status);
         //test
         if(currentDate >= start && currentDate <= end) {
             output.push(

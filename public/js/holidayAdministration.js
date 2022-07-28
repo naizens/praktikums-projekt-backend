@@ -20,7 +20,7 @@ allHolidays.forEach(function(entry) {
     } else if(timeOfDay === "afternoon"){
         timeOfDayText = "Nachmittag";
     }
-    
+
     if(holidayType === "fullDay"){
         typeText = "Ganztägig";
     } else if(holidayType === "halfDay"){
@@ -63,24 +63,25 @@ function acceptRequest(personID, holidayID){
     const acceptForm = new FormData();
     acceptForm.append("personID", personID);
     acceptForm.append("holidayID", holidayID);
-    fetch("/acceptRequest", { 
+    fetch("/acceptRequest", {
         method: "POST",
         body: acceptForm
     }).then(function(response){
-        console.log(response);
+        if(response.ok){
+            console.log(response);
+        }
     }
     ).catch(function(error){
         console.log(error);
     }
     );
 }
-        
 
 function declineRequest(personID, holidayID){
     const declineForm = new FormData();
     declineForm.append("personID", personID);
     declineForm.append("holidayID", holidayID);
-    fetch("/declineRequest", { 
+    fetch("/declineRequest", {
         method: "POST",
         body: declineForm
     }).then(function(response){
