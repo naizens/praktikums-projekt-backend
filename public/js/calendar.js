@@ -121,8 +121,27 @@ function toggleModal () {
     modal.classList.toggle('pointer-events-none');
     body.classList.toggle('modal-active');
     body.classList.toggle('overflow-hidden');
-}
+//Show Radio Buttons for which time of the halfDay
+const halfDayRadio = document.querySelectorAll("#halfDayRadio, #fullDayRadio");
+halfDayRadio.forEach((input) =>{
+    input.addEventListener("click", function(event) {
+        if(input.checked && input.value === "halfDay") {
+            document.querySelectorAll(".halfDayRadios").forEach((entry) =>{
+                entry.classList.add("flex");
+                entry.classList.remove("hidden");
+            });
+        }
+        else {
+            document.querySelectorAll(".halfDayRadios").forEach((entry) =>{
+                entry.classList.remove("flex");
+                entry.classList.add("hidden");
+            })
+        }
+    })
+});
 // End of Modal Part ---------------------------------------------------------
+
+
 // Select the add button and add the eventlistener to it
 const addButton = document.querySelector(".addButton");
 addButton.addEventListener("click", addEvent);

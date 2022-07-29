@@ -112,20 +112,20 @@
                     </label>
                     <label class="my-3 p-2 border border-slate-300 rounded-md shadow-sm justify-around grid grid-cols-2 text-lg font-medium">
                         <span class="flex items-center justify-center">
-                            <input value="fullDay" name="holidaytype" id="default-radio-1" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-slate-300" checked>
-                            <label for="default-radio-1" class="ml-2 text-lg font-semibold">Ganztags</label>
+                            <input value="fullDay" name="holidaytype" id="fullDayRadio" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-slate-300" checked>
+                            <label for="fullDayRadio" class="ml-2 text-lg font-semibold">Ganztags</label>
                         </span>
                         <span class="flex items-center justify-center">
-                            <input value="halfDay" name="holidaytype" id="default-radio-2" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-slate-300">
-                            <label for="default-radio-2" class="ml-2 text-lg font-semibold">Halbtags</label>
+                            <input value="halfDay" name="holidaytype" id="halfDayRadio" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-slate-300">
+                            <label for="halfDayRadio" class="ml-2 text-lg font-semibold">Halbtags</label>
                         </span>
-                        <span class="flex items-center justify-center">
-                            <input value="morning" name="daytime" id="default-radio-3" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-slate-300">
-                            <label for="default-radio-3" class="ml-2 text-md font-semibold">Vormittags</label>
+                        <span class="halfDayRadios hidden items-center justify-center">
+                            <input value="morning" name="daytime" id="morningRadio" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-slate-300">
+                            <label for="morningRadio" class="ml-2 text-md font-semibold">Vormittags</label>
                         </span>
-                        <span class="flex items-center justify-center">
-                            <input value="afternoon" name="daytime" id="default-radio-4" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-slate-300">
-                            <label for="default-radio-4" class="ml-2 text-md font-semibold">Nachmittags</label>
+                        <span class="halfDayRadios hidden items-center justify-center">
+                            <input value="afternoon" name="daytime" id="afternoonRadio" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-slate-300">
+                            <label for="afternoonRadio" class="ml-2 text-md font-semibold">Nachmittags</label>
                         </span>
                     </label>
                     <label class="my-3 p-2 border border-slate-300 rounded-md shadow-sm flex flex-col justify-center text-lg font-medium ">
