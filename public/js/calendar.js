@@ -129,6 +129,9 @@ addButton.addEventListener("click", addEvent);
 
 function calculateHoliday(){
     let holidayCount = holidays.reduce(function(previous, current){
+        if(current.status === "registered") {
+            return previous;
+        }
         if(current.type === "halfDay"){
             return previous + 0.5;
         }
