@@ -1,38 +1,50 @@
 // Language: javascript
 "use strict";
+placeHolidayEntry()
+function placeHolidayEntry(){
+    document.getElementById("pendingRequests").innerHTML = ""
+    allHolidays.forEach(function(entry) {
+        const department = entry.person.department;
+        const firstName = entry.person.firstName;
+        const lastName = entry.person.lastName;
+        const start = entry.start;
+        const end = entry.end;
+        const holidayType = entry.type;
+        const timeOfDay = entry.daytime;
+        const status = entry.status;
 
-allHolidays.forEach(function(entry) {
-    const department = entry.person.department;
-    const firstName = entry.person.firstName;
-    const lastName = entry.person.lastName;
-    const start = entry.start;
-    const end = entry.end;
-    const holidayType = entry.type;
-    const timeOfDay = entry.daytime;
-    const status = entry.status;
+        let textColor;
 
-    const textColor = "text-" + department;
+        if(department === "web") {
+            textColor = "text-web"
+        } else if(department === "media") {
+            textColor = "text-media"
+        } else if(department === "network"){
+            textColor = "text-network"
+        } else{
+            textColor = "text-app"
+        }
 
-    let typeText;
-    let timeOfDayText;
-    if(timeOfDay === "morning"){
-        timeOfDayText = "Vormittag";
-    } else if(timeOfDay === "afternoon"){
-        timeOfDayText = "Nachmittag";
-    }
+        let typeText;
+        let timeOfDayText;
+        if(timeOfDay === "morning"){
+            timeOfDayText = "Vormittag";
+        } else if(timeOfDay === "afternoon"){
+            timeOfDayText = "Nachmittag";
+        }
 
-    if(holidayType === "fullDay"){
-        typeText = "Ganztägig";
-    } else if(holidayType === "halfDay"){
-        typeText = "Halbtägig" + " - " + timeOfDayText;
-    }
+        if(holidayType === "fullDay"){
+            typeText = "Ganztägig";
+        } else if(holidayType === "halfDay"){
+            typeText = "Halbtägig" + " - " + timeOfDayText;
+        }
 
-    let output = []
+        let output = []
 
-    if(checkStatus(status) === true){
-        output.push(
-            `
-            <div class="flex items-center p-4">
+        if(checkStatus(status) === true){
+            output.push(
+                `
+            <div id="${entry.id}" class="flex items-center p-4">
                 <img src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="h-20 w-20 flex-none rounded-full">
                 <div class="ml-4 flex-auto">
                     <div class="text-xl font-medium text-slate-600">${firstName} ${lastName}</div>
@@ -46,10 +58,10 @@ allHolidays.forEach(function(entry) {
                 </div>
             </div>
             `);
-    }
-    document.getElementById("pendingRequests").innerHTML += output.join("");
-});
-
+        }
+        document.getElementById("pendingRequests").innerHTML += output.join("");
+    });
+}
 
 function checkStatus(status){
     if(status === "registered"){
@@ -68,7 +80,7 @@ function acceptRequest(personID, holidayID){
         body: acceptForm
     }).then(function(response){
         if(response.ok){
-            console.log(response);
+            document.getElementById(`${holidayID}`).remove()
         }
     }
     ).catch(function(error){
@@ -86,7 +98,7 @@ function declineRequest(personID, holidayID){
         body: declineForm
     }).then(function(response){
         if(response.ok){
-            console.log(response);
+            document.getElementById(`${holidayID}`).remove()
         }
     }).catch(function(error){
         console.log(error);
