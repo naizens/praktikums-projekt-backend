@@ -16,12 +16,12 @@ class PersonController extends Controller
 
     public function renderMain(){
         return view("/layers/base", [
-            "user" => Auth::user()
+            "user"              => Auth::user()
         ]);
     }
     public function renderDashboard(){
         return view("templates/dashboard", [
-            "user" => Auth::user()
+            "user"              => Auth::user()
         ]);
     }
     public function renderCalendar(){
@@ -34,7 +34,12 @@ class PersonController extends Controller
     }
     public function renderProfile(){
         return view("templates/profile", [
-            "user" => Auth::user()
+            "user"              => Auth::user()
+        ]);
+    }
+    public function renderManageEmployees(){
+        return view("template/manageEmployees", [
+            "user"              => Auth::user()
         ]);
     }
     public function renderEmployees(){
