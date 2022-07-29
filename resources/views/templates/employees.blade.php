@@ -87,7 +87,7 @@
             </div>
             <div id="tableWeb" class="bg-white mx-4 my-2 border shadow-md rounded-md overflow-hidden">
                 <div id="tableHeader" class="bg-slate-50 grid grid-cols-2 border-b text-center font-bold text-slate-600">
-                    <div class="col-span-2 border-b text-slate-700 text-xl bg-web">Media</div>
+                    <div class="col-span-2 border-b text-slate-700 text-xl bg-web">Web</div>
                     <div class="py-1 px-2 border-r">Name</div>
                     <div class="py-1 px-2 border-r">Status</div>
                 </div>
