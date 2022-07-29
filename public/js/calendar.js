@@ -246,7 +246,24 @@ async function loadEvents(startDate) {
         if(currentDate >= start && currentDate <= end) {
             output.push(
                 `
-                <div class="w-full text-center font-semibold text-slate-500 my-1 bg-white rounded-md">${name}</div>
+                <div class="w-full text-center text-slate-500 font-semibold">${name}</div>
+                `
+            );
+        }
+    });
+    allPersons.forEach(function(entry) {
+        const currentYear = (new Date()).getFullYear();
+        const birthDate = (new Date(entry.birthDate)).toJSON().slice(0, 10);
+        const slicedBirthDate = currentYear + birthDate.slice(4, birthDate.length);
+        if(currentDate === slicedBirthDate) {
+            output.push(
+                `
+                <div class="w-full text-center text-slate-500 font-semibold bg-white rounded-md my-0.5 flex ">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 self-center ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                    </svg>
+                    <div class="w-full mr-2">${entry.firstName} ${entry.lastName}</div>
+                </div>
                 `
             );
         }

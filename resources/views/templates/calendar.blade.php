@@ -3,6 +3,7 @@
     <script>
         window.holidays = {{ Illuminate\Support\Js::from($holidays) }};
         window.allHolidays = {{ Illuminate\Support\Js::from($allHolidays) }};
+        window.allPersons = {{ Illuminate\Support\Js::from($allPersons) }};
     </script>
 @endsection
 @section('content')
