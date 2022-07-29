@@ -114,13 +114,17 @@ document.onkeydown = function(evt) {
     }
 };
 // Function for the toggling of the modal
-function toggleModal () {
+function toggleModal (clickedDate, clickEvent) {
     const body = document.querySelector('body');
     const modal = document.querySelector('.modal');
     modal.classList.toggle('opacity-0');
     modal.classList.toggle('pointer-events-none');
     body.classList.toggle('modal-active');
     body.classList.toggle('overflow-hidden');
+    if(clickEvent){
+        document.querySelector("[name='startDate']").value = clickedDate;
+    }
+}
 //Show Radio Buttons for which time of the halfDay
 const halfDayRadio = document.querySelectorAll("#halfDayRadio, #fullDayRadio");
 halfDayRadio.forEach((input) =>{
@@ -384,7 +388,7 @@ async function placeDays(monthIndex, year) {
         if(isWeekEnd && current) {
             output.push(
             `
-            <div class="weekend col-span-1 border border-slate-300 bg-slate-100 rounded-md overflow-hidden">
+            <div class="weekend select-none col-span-1 border border-slate-300 bg-slate-100 rounded-md overflow-hidden">
                 <div class="p-1 bg-slate-100 text-gray-300">
                     <div class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full">
                         ${dayFormat}
@@ -398,7 +402,7 @@ async function placeDays(monthIndex, year) {
             output.push(
             current?
                 ` ${isHoliday?
-                    `<div class="col-span-1 border border-slate-300 bg-slate-100 rounded-md group">
+                    `<div class="select-none col-span-1 border border-slate-300 bg-slate-100 rounded-md group">
                         <div class="p-1 bg-slate-100 rounded-t-md text-gray-500">
                             <div id="" class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full">
                                 ${dayFormat}
@@ -411,7 +415,7 @@ async function placeDays(monthIndex, year) {
                     </div>
                     `
                     :
-                    `<div class="col-span-1 border border-slate-300 bg-slate-100 rounded-md group hover:bg-blue-100 hover:shadow-lg active:bg-slate-100">
+                    `<div name="dayField" data-date="${startDate.toJSON().slice(0, 10)}" class="select-none col-span-1 border border-slate-300 bg-slate-100 rounded-md group hover:bg-blue-100 hover:shadow-lg active:bg-slate-100">
                         <div class="p-1 bg-slate-100 rounded-t-md text-gray-500 group-hover:bg-blue-100 group-active:bg-slate-100">
                             <div id="" class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full group-hover:text-blue-600 group-active:text-gray-500">
                                 ${dayFormat}
@@ -455,6 +459,14 @@ async function placeDays(monthIndex, year) {
                     }
             });
         });
+    });
+    const dayFields = document.querySelectorAll("[name='dayField']");
+    dayFields.forEach((entry) =>{
+        entry.addEventListener("click", function(event) {
+            const start = entry.dataset.date; 
+            let clickEvent = true;
+            toggleModal(start, clickEvent);
+        })
     });
 }
 function setNextMonth() {
