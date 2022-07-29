@@ -14,7 +14,7 @@ class AddFlagToPerson extends Migration
     public function up()
     {
         Schema::table('people', function (Blueprint $table) {
-            $table->boolean('canManageHolidays')->default(false);
+            $table->boolean('admin')->default(false);
         });
     }
 
@@ -26,7 +26,7 @@ class AddFlagToPerson extends Migration
     public function down()
     {
         Schema::table('people', function (Blueprint $table) {
-            $table->dropColumn('canManageHolidays');
+            $table->dropColumn('admin');
         });
     }
 }

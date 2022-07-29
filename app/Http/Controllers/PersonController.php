@@ -42,7 +42,7 @@ class PersonController extends Controller
         ]);
     }
     public function renderVacations(Request $request){
-        if(! $request->user()->canManageHolidays){
+        if(! $request->user()->admin){
             return response(view("errors.4xx", [
                 "status"        =>  403,
                 "statusText"    => "Nicht Autorisiert.",
@@ -69,7 +69,7 @@ class PersonController extends Controller
     }
 
     public function acceptVacation(\Illuminate\Http\Request $request){
-        if(! $request->user()->canManageHolidays){
+        if(! $request->user()->admin){
             return response("You are not allowed to manage holidays", 403);
         }
         $inputs = $request->all();
@@ -79,7 +79,7 @@ class PersonController extends Controller
         return redirect("/vacations");
     }
     public function declineVacation(\Illuminate\Http\Request $request){
-        if(! $request->user()->canManageHolidays){
+        if(! $request->user()->admin){
             return response("You are not allowed to manage holidays", 403);
         }
         $inputs = $request->all();

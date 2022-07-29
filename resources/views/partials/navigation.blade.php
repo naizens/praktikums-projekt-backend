@@ -42,7 +42,7 @@
                         Mitarbeiter
                     </span>
                 </a>
-                @if(Auth::user()->canManageHolidays)
+                @if(Auth::user()->admin)
                 <a href="/vacations" class="my-1 mx-2 flex items-center rounded-md group hover:bg-slate-100">
                     <div class="p-1 mx-1">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-400 group-hover:text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

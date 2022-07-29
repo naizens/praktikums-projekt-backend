@@ -21,14 +21,14 @@ class Person extends Model
         "birthDate",
         "department",
         "maxAmountOfHolidays",
-        "canManageHolidays",
+        "admin",
     ];
     protected $dates = [
         "birthDate"
     ];
     protected $casts = [
         "birthDate" => "date:Y-m-d",
-        "canManageHolidays" => "boolean"
+        "admin" => "boolean"
     ];
 
     public function holidays()
