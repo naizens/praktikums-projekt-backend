@@ -26,9 +26,10 @@ class PersonController extends Controller
     }
     public function renderCalendar(){
         return view("templates/calendar", [
-            "user" => Auth::user(),
-            "holidays"=>PersonHoliday::where("person_id", Auth::user()->id)->get(),
-            "allHolidays"=>PersonHoliday::with("person")->get(),
+            "user"              => Auth::user(),
+            "holidays"          =>PersonHoliday::where("person_id", Auth::user()->id)->get(),
+            "allHolidays"       =>PersonHoliday::with("person")->get(),
+            "allPersons"        => Person::all()
         ]);
     }
     public function renderProfile(){
@@ -58,11 +59,11 @@ class PersonController extends Controller
     public function submit(\Illuminate\Http\Request $request){
         $inputs = $request->all();
         $holiday = new PersonHoliday([
-            "person_id"=>Auth::user()->id,
-            "start"=>$inputs["startDate"],
-            "end"=>$inputs["endDate"],
-            "type"=>$inputs["holidaytype"],
-            "daytime"=>$inputs["daytime"] ?? null
+            "person_id"         =>Auth::user()->id,
+            "start"             =>$inputs["startDate"],
+            "end"               =>$inputs["endDate"],
+            "type"              =>$inputs["holidaytype"],
+            "daytime"           =>$inputs["daytime"] ?? null
         ]);
         $holiday->save();
         return redirect("/calendar");
