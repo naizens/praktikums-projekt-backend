@@ -150,7 +150,7 @@ halfDayRadio.forEach((input) =>{
 const addButton = document.querySelector(".addButton");
 addButton.addEventListener("click", addEvent);
 
-function calculateHoliday(){
+function calculateHoliday(currentYear, year){
     let holidayCount = holidays.reduce(function(previous, current){
         if(current.status === "registered") {
             return previous;
@@ -162,8 +162,25 @@ function calculateHoliday(){
     }, 0);
     let bookedDays = document.getElementById("bookedDays");
     bookedDays.innerHTML = holidayCount;
+
+    let restHolidaysOfYear = window.currentUser.maxAmountOfHolidays + window.currentUser.holidaysOfPreviousYear - holidayCount
     let remainingDays = document.getElementById("remainingDays");
-    remainingDays.innerHTML = window.currentUser.maxAmountOfHolidays - holidayCount;
+
+    const restDaysForm = new FormData();
+    restDaysForm.append("userId", window.currentUser.id);
+    restDaysForm.append("restDays", restHolidaysOfYear);
+
+    fetch("/getRestDays", {
+        method: "POST",
+        body: restDaysForm
+    }).then(function (response) {
+        if(response.ok) {
+            remainingDays.innerHTML = restHolidaysOfYear;
+        }
+    }).catch(function (error) {
+        console.log(error);
+    });
+
 }
 function workingDaysBetweenDates(startDate, endDate, getWorkingDays) {
     startDate = new Date(startDate);
@@ -196,7 +213,7 @@ function workingDaysBetweenDates(startDate, endDate, getWorkingDays) {
     }
     return days;
 }
-calculateHoliday();
+calculateHoliday(currentYear);
 // Function for adding Events with the Modal
 function addEvent() {
     // Get the element vacationForm and create a new FormData object
@@ -228,12 +245,13 @@ function addEvent() {
     if (!status) {
         return;
     }
+    let yearOfHoliday = startDate.substring(0, 4);
     // Reload the page
     form.submit();
     placeDays(monthIndex, currentYear);
     // Close the modal
     toggleModal();
-    calculateHoliday()
+    calculateHoliday(currentYear, yearOfHoliday);
 }
 // Function for loading the events from the localstorage
 async function loadEvents(startDate) {
@@ -463,7 +481,7 @@ async function placeDays(monthIndex, year) {
     const dayFields = document.querySelectorAll("[name='dayField']");
     dayFields.forEach((entry) =>{
         entry.addEventListener("click", function(event) {
-            const start = entry.dataset.date; 
+            const start = entry.dataset.date;
             let clickEvent = true;
             toggleModal(start, clickEvent);
         })

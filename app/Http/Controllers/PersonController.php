@@ -37,14 +37,25 @@ class PersonController extends Controller
             "user"              => Auth::user()
         ]);
     }
-    public function renderManageEmployees(){
-        return view("template/manageEmployees", [
-            "user"              => Auth::user()
+    public function renderManageEmployees(Request $request){
+        if(! $request->user()->admin){
+            return response(view("errors.4xx", [
+                "status"        =>  403,
+                "statusText"    => "Nicht Autorisiert.",
+                "extraText"     => "Du hast keinen Zugriff, da du nicht die benötigten Rechte hast."
+            ]), 403);
+        }
+
+        return view("templates/manageEmployees", [
+            "user"              => Auth::user(),
+            "allHolidays"       => PersonHoliday::with("person")->get(),
+            "allPersons"        => Person::all()
         ]);
     }
     public function renderEmployees(){
         return view("templates/employees", [
-            "user" => Auth::user()
+            "user"              => Auth::user(),
+            "allPersons"        => Person::all()
         ]);
     }
     public function renderVacations(Request $request){
@@ -74,9 +85,22 @@ class PersonController extends Controller
         return redirect("/calendar");
     }
 
+    public function getRestDays(\Illuminate\Http\Request $request) {
+        $inputs = $request->all();
+        $user = Person::find($inputs["userId"]);
+        $user->restHolidays = $inputs["restDays"];
+        $user->save();
+        return redirect("/calendar");
+
+    }
+
     public function acceptVacation(\Illuminate\Http\Request $request){
         if(! $request->user()->admin){
-            return response("You are not allowed to manage holidays", 403);
+            return response(view("errors.4xx", [
+                "status"        =>  403,
+                "statusText"    => "Nicht Autorisiert.",
+                "extraText"     => "Du hast keinen Zugriff, da du nicht die benötigten Rechte hast."
+            ]), 403);;
         }
         $inputs = $request->all();
         $holiday = PersonHoliday::find($inputs["holidayID"]);
@@ -86,7 +110,11 @@ class PersonController extends Controller
     }
     public function declineVacation(\Illuminate\Http\Request $request){
         if(! $request->user()->admin){
-            return response("You are not allowed to manage holidays", 403);
+            return response(view("errors.4xx", [
+                "status"        =>  403,
+                "statusText"    => "Nicht Autorisiert.",
+                "extraText"     => "Du hast keinen Zugriff, da du nicht die benötigten Rechte hast."
+            ]), 403);
         }
         $inputs = $request->all();
         $holiday = PersonHoliday::find($inputs["holidayID"]);

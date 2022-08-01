@@ -22,6 +22,8 @@ class Person extends Model
         "department",
         "maxAmountOfHolidays",
         "admin",
+        "restHolidays",
+        "holidaysOfPreviousYear",
     ];
     protected $dates = [
         "birthDate"

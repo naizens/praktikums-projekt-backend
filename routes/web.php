@@ -29,6 +29,7 @@ $router->group(['middleware' => 'auth'], function() use ($router) {
     $router->get('/manageEmployees', 'PersonController@renderManageEmployees');
     $router->post('/acceptRequest', 'PersonController@acceptVacation');
     $router->post('/declineRequest', 'PersonController@declineVacation');
+    $router->post('/getRestDays', 'PersonController@getRestDays');
     $router->get("/people","PersonController@index");
     $router->get("/logout", "ActionController@logout");
 });

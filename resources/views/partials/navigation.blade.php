@@ -52,7 +52,6 @@
                     <span class="ml-1 text-md font-semibold p-1 text-slate-600 hidden md:flex">
                     Mitarbeiter Verwalten
                 </span>
-
                 </a>
                 <a href="/vacations" class="my-1 mx-2 flex items-center rounded-md group hover:bg-slate-100">
                     <div class="p-1 mx-1">

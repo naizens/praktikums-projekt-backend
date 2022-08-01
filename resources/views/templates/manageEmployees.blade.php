@@ -52,4 +52,5 @@
         </div>
     </header>
     <main>
+    </main>
 @endsection
