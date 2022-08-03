@@ -87,14 +87,14 @@
                 <div id="profileMenu" class="z-40 hidden -mt-80 ml-1/4 border border-slate-300 focus:outline-none absolute left-0 origin-top-right divide-y divide-gray-100 overflow-hidden rounded-md bg-white shadow-md ring-1 ring-black ring-opacity-5">
                     <div class="p-1 my-1 grid justify-center w-72">
                         <div class="p-1 self-center justify-self-center">
-                            <img id="profilePicture" class="h-36 w-36 rounded-full ring-2 ring-offset-2 ring-web" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                            <img id="profilePicture" class="h-36 w-36 rounded-full ring-2 ring-offset-2" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                         </div>
                         <div class="p-1 my-1 justify-self-center text-center">
                             <h1 id="name" class="text-xl font-bold">{{$user->firstName}} {{$user->lastName}}</h1>
                             <h2 id="email" class="-mt-1 text-md">{{$user->eMail}}</h2>
                         </div>
                         <div class="my-1 border-b border-slate-200 w-60"></div>
-                        <div class="text-center my-1 mx-14 p-0.5 bg-web rounded-md text-slate-900 font-medium">[NF]-Web</div>
+                        <div id="departmentBg" class="text-center my-1 mx-14 p-0.5 rounded-md text-slate-900 font-medium">[NF]-Web</div>
                         <div class="my-1 border-b border-slate-200 w-60"></div>
                     </div>
                     <button class="w-full hover:bg-slate-50 text-left" role="none">

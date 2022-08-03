@@ -12,6 +12,7 @@
     <script type="text/javascript">
         window.currentUser = {{ Illuminate\Support\Js::from($user) }};
     </script>
+    <script async src="/js/base.js"></script>
     @section('scripts')
     @show
     <style>
@@ -47,6 +48,5 @@
         @show()
     </div>
 </div>
-<script async src="/js/base.js"></script>
 </body>
 </html>
