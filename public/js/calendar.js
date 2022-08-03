@@ -274,9 +274,9 @@ async function loadEvents(startDate) {
         }
     });
     allPersons.forEach(function(entry) {
-        const currentYear = (new Date()).getFullYear();
+        const year = currentDate.substring(0, 4);
         const birthDate = (new Date(entry.birthDate)).toJSON().slice(0, 10);
-        const slicedBirthDate = currentYear + birthDate.slice(4, birthDate.length);
+        const slicedBirthDate = year + birthDate.slice(4, birthDate.length);
         if(currentDate === slicedBirthDate) {
             output.push(
                 `
