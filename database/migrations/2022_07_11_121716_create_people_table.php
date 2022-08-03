@@ -25,7 +25,10 @@ class CreatePeopleTable extends Migration
             $table->string("lastName");
             $table->date("birthDate");
             $table->string("department");
+            $table->boolean("admin")->default(false);
             $table->integer("maxAmountOfHolidays");
+            $table->integer("holidaysOfPreviousYear")->nullable();
+            $table->integer("restHolidays")->nullable();
             $table->timestamps();
         });
 
@@ -39,6 +42,7 @@ class CreatePeopleTable extends Migration
             "department"            => 'web',
             "maxAmountOfHolidays"   => 28,
             "admin"                 => true,
+
         ]))->save();
         (new Person([
             "userName"              => 'test',
@@ -51,21 +55,9 @@ class CreatePeopleTable extends Migration
             "maxAmountOfHolidays"   => 30,
             "admin"                 => false,
         ]))->save();
-        (new Person ([
-            "userName"              => 'test2',
-            "eMail"                 => 'test2@netzfactor.de',
-            "password"              => Hash::make('1234'),
-            "firstName"             => 'Test2',
-            "lastName"              => 'Name',
-            "birthDate"             => '2000-29-09',
-            "department"            => 'media',
-            "maxAmountOfHolidays"   => 30,
-            "admin"                 => false,
-        ]))->save();
-
     }
 
-    /**
+    /**S
      * Reverse the migrations.
      *
      * @return void
