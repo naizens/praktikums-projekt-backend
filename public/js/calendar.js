@@ -260,11 +260,12 @@ async function loadEvents(startDate) {
     }
     let output = [];
     const currentDate = startDate.toJSON().slice(0, 10);
+    
     schoolHolidays.forEach(function(entry) {
         let start = (new Date(entry.start)).toJSON().slice(0, 10);
         let end = (new Date(entry.end)).toJSON().slice(0, 10);
         let name = entry.name.toUpperCase();
-
+    
         if(currentDate >= start && currentDate <= end) {
             output.push(
                 `
@@ -447,15 +448,16 @@ async function placeDays(monthIndex, year) {
             }
             `:
                 `
-                <div class="col-span-1 border border-slate-300 bg-slate-50 rounded-md overflow-hidden">
+                <div data-date="${startDate.toJSON().slice(0, 10)}" class="col-span-1 border border-slate-300 bg-slate-50 rounded-md overflow-hidden">
                     <div class="p-1 bg-slate-50 text-gray-200">
-                        <div class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium ">
-                            ${dayFormat}
+                        <div id="" class="w-8 h-8 pt-0.5 m-1 truncate text-2xl text-center font-medium rounded-full">
+                                ${dayFormat}
                         </div>
                     </div>
                     <div class="py-1 h-24 min-h-[9rem]"></div>
                 </div>
-            `)
+            `
+            );
         }
         // Der While-Loop ändert die bestehenden Vergleichswerte nicht, daher müssen wir das tun:
         startDate.setDate(startDate.getDate() + 1);
