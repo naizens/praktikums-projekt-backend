@@ -20,17 +20,27 @@ $router->get('/', function () use ($router) {
 
 $router->group(['middleware' => 'auth'], function() use ($router) {
     $router->get('/main', 'PersonController@renderMain');
+
     $router->get('/dashboard', 'PersonController@renderDashboard');
+
     $router->get('/calendar', 'PersonController@renderCalendar');
     $router->post('/calendar/submit', "PersonController@submit");
+    $router->post('/getRestDays', 'PersonController@getRestDays');
+
     $router->get('/profile', 'PersonController@renderProfile');
+
     $router->get('/employees', 'PersonController@renderEmployees');
+
     $router->get('/vacations', 'PersonController@renderVacations');
-    $router->get('/manageEmployees', 'PersonController@renderManageEmployees');
     $router->post('/acceptRequest', 'PersonController@acceptVacation');
     $router->post('/declineRequest', 'PersonController@declineVacation');
-    $router->post('/getRestDays', 'PersonController@getRestDays');
+
+
+    $router->get('/manageEmployees', 'PersonController@renderManageEmployees');
+    $router->post('/manageEmployees/submit', 'PersonController@submitUser');
+
     $router->get("/people","PersonController@index");
+
     $router->get("/logout", "ActionController@logout");
 });
 

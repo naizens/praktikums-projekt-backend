@@ -7,6 +7,7 @@ use App\Models\PersonHoliday;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PersonController extends Controller
 {
@@ -48,7 +49,6 @@ class PersonController extends Controller
 
         return view("templates/manageEmployees", [
             "user"              => Auth::user(),
-            "allHolidays"       => PersonHoliday::with("person")->get(),
             "allPersons"        => Person::all()
         ]);
     }
@@ -70,6 +70,43 @@ class PersonController extends Controller
             "user" => Auth::user(),
             "allHolidays"=>PersonHoliday::with("person")->get()
         ]);
+    }
+
+    public function submitUser(\Illuminate\Http\Request $request){
+        if(! $request->user()->admin){
+            return response(view("errors.4xx", [
+                "status"        =>  403,
+                "statusText"    => "Nicht Autorisiert.",
+                "extraText"     => "Du hast keinen Zugriff, da du nicht die benötigten Rechte hast."
+            ]), 403);
+        }
+        $inputs = $request->all();
+        $department = null;
+        $inputs["department"] = intval($inputs["department"]);
+        if($inputs["department"] === 1){
+            $department = "web";
+        } else if($inputs["department"] === 2){
+            $department = "app";
+        } else if($inputs["department"] === 3){
+            $department = "network";
+        } else if($inputs["department"] === 4){
+            $department = "media";
+        }
+
+        $person = new Person([
+            "userName"              => $inputs["userName"],
+            "eMail"                 => $inputs["eMail"],
+            "password"              => Hash::make($inputs["password"]),
+            "firstName"             => $inputs["firstName"],
+            "lastName"              => $inputs["lastName"],
+            "birthDate"             => $inputs["birthDate"],
+            "department"            => $department,
+            "maxAmountOfHolidays"   => $inputs["maxAmountOfHolidays"],
+
+
+        ]);
+        $person->save();
+        return redirect("/manageEmployees");
     }
 
     public function submit(\Illuminate\Http\Request $request){

@@ -72,7 +72,12 @@ function addUser() {
     let form = document.getElementById("userForm");
     let formData = new FormData(form)
 
-    console.log(form);
+    if(formData.get("maxAmountOfHolidays") < 0){
+        alert("Die Urlaubsanzahl darf nicht negativ sein!");
+        return;
+    } 
 
-    
+    form.submit();   
+}
+
 }

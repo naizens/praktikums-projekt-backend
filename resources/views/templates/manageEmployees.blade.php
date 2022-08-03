@@ -48,7 +48,7 @@
             </div>
         </div>
     </header>
-    <main>
+    <main class="w-full">
         <!-- Modal -->
         <div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-20">
             <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
@@ -85,12 +85,20 @@
                             <input required type="text" name="lastName" class="lastName shadow-sm border border-slate-200 rounded-md p-1">
                         </label>
                         <label class="my-3 p-2 border border-slate-300 rounded-md shadow-sm flex flex-col justify-center text-lg font-medium">
+                            <span>Benutzername:</span>
+                            <input required type="text" name="userName" class="firstName border border-slate-200 rounded-md p-1">
+                        </label>
+                        <label class="my-3 p-2 border border-slate-300 rounded-md shadow-sm flex flex-col justify-center text-lg font-medium">
+                            <span>Passwort:</span>
+                            <input required type="password" name="password" class="firstName border border-slate-200 rounded-md p-1">
+                        </label>
+                        <label class="my-3 p-2 border border-slate-300 rounded-md shadow-sm flex flex-col justify-center text-lg font-medium">
                             <span>Geburtstag:</span>
-                            <input required type="date" name="birthdate" class="shadow-sm border border-slate-200 rounded-md p-1">
+                            <input required type="date" name="birthDate" class="shadow-sm border border-slate-200 rounded-md p-1">
                         </label>
                         <label class="my-3 p-2 border border-slate-300 rounded-md shadow-sm flex flex-col justify-center text-lg font-medium">
                             <span>E-Mail:</span>
-                            <input required type="email" name="eMail" class="lastName shadow-sm border border-slate-200 rounded-md p-1">
+                            <input required type="eMail" name="eMail" class="lastName shadow-sm border border-slate-200 rounded-md p-1">
                         </label>
                         <label class="my-3 p-2 border border-slate-300 rounded-md shadow-sm flex flex-col justify-center text-lg font-medium">
                             <span>Abteilung:</span>
