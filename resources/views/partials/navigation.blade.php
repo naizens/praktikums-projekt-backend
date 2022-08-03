@@ -78,7 +78,7 @@
         </div>
 
         <div class="flex h-20 border-b border-slate-200 bg-white shadow-sm items-center w-full  p-2 lg:flex-none md:p-4">
-            <div class="flex overflow-hidden p-1 rounded-full hidden md:flex">
+            <div class="overflow-hidden p-1 rounded-full hidden md:flex">
                 <img class="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
             </div>
             <div class="items-center md:ml-2">
