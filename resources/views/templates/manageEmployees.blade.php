@@ -1,4 +1,9 @@
 @extends('layers.base')
+@section('scripts')
+    <script>
+        window.allPersons = {{ Illuminate\Support\Js::from($allPersons) }};
+    </script>
+@endsection
 @section('content')
     <header class="z-20 h-20 flex bg-white items-center justify-between border-b border-gray-200 py-4 px-6 lg:flex-none">
         <div class="items-center">
@@ -121,6 +126,58 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="my-6 flex flex-col">
+            <div class="md:mx-12 relative z-10 my-4">
+                <div class="divide-y divide-slate-400/20 rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-900 shadow-md shadow-black/5 ring-1 ring-slate-700/10">
+                    <div id="webHeader" class="flex items-center p-2 w-full">
+                        <div class="text-center text-xl font-medium text-slate-600 w-full">
+                            [NF]-WEB
+                        </div>
+                    </div>
+                    <div id="webContent" class="divide-y divide-slate-400/20">
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:mx-12 relative z-10 my-4">
+                <div class="divide-y divide-slate-400/20 rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-900 shadow-md shadow-black/5 ring-1 ring-slate-700/10">
+                    <div id="mediaHeader" class="flex items-center p-2 w-full">
+                        <div class="text-center text-xl font-medium text-slate-600 w-full">
+                            [NF]-MEDIA
+                        </div>
+                    </div>
+                    <div id="mediaContent" class="divide-y divide-slate-400/20">
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:mx-12 relative z-10 my-4">
+                <div class="divide-y divide-slate-400/20 rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-900 shadow-md shadow-black/5 ring-1 ring-slate-700/10">
+                    <div id="appHeader" class="flex items-center p-2 w-full">
+                        <div class="text-center text-xl font-medium text-slate-600 w-full">
+                            [NF]-APP
+                        </div>
+                    </div>
+                    <div id="appContent" class="divide-y divide-slate-400/20">
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:mx-12 relative z-10 my-4">
+                <div class="divide-y divide-slate-400/20 rounded-lg bg-white text-[0.8125rem] leading-5 text-slate-900 shadow-md shadow-black/5 ring-1 ring-slate-700/10">
+                    <div id="netHeader" class="flex items-center p-2 w-full">
+                        <div class="text-center text-xl font-medium text-slate-600 w-full">
+                            [NF]-NET
+                        </div>
+                    </div>
+                    <div id="netContent" class="divide-y divide-slate-400/20">
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </main>
     <script type="text/javascript" async src="/js/manageEmployees.js"></script>

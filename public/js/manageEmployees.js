@@ -80,4 +80,77 @@ function addUser() {
     form.submit();   
 }
 
+placeEmployees()
+
+function placeEmployees(){
+    const webContent = document.querySelector("#webContent");
+    const appContent = document.querySelector("#appContent");
+    const networkContent = document.querySelector("#netContent");
+    const mediaContent = document.querySelector("#mediaContent");
+
+    let outputWeb = [];
+    let outputApp = [];
+    let outputNetwork = [];
+    let outputMedia = [];
+
+    allPersons.forEach((person) => {
+        const firstName = person.firstName;
+        const lastName = person.lastName;
+        const userName = person.userName;
+        const birthDate = person.birthDate;
+        const eMail = person.eMail;
+        const department = person.department;
+        const maxAmountOfHolidays = person.maxAmountOfHolidays;
+        const restHolidays = person.restHolidays;
+        const holidaysOfPreviousYear = person.holidaysOfPreviousYear;
+
+        let output = 
+        `
+            <div id="person1" class="grid grid-cols-8 text-center divide-x">
+                <div class="">
+                    ${firstName}
+                </div>
+                <div>
+                    ${lastName}
+                </div>
+                <div>
+                    ${userName}
+                </div>
+                <div>
+                    ${eMail}
+                </div>
+                <div>
+                    ${birthDate}
+                </div>
+                <div>
+                    ${maxAmountOfHolidays} Tag(e)
+                </div>
+                <div>
+                    ${restHolidays} Tag(e)
+                </div>
+                <div>
+                    ${holidaysOfPreviousYear} Tag(e)
+                </div>
+            </div>
+        `
+
+        if(department === "web"){
+            console.log("web");
+            outputWeb.push(output);
+        }
+        else if(department === "app"){
+            outputApp.push(output);
+        }
+        else if(department === "network"){
+            outputNetwork.push(output);
+        }
+        else if(department === "media"){
+            outputMedia.push(output);
+        }
+    });
+
+    webContent.innerHTML = outputWeb.join("");
+    appContent.innerHTML = outputApp.join("");
+    networkContent.innerHTML = outputNetwork.join("");
+    mediaContent.innerHTML = outputMedia.join("");
 }
