@@ -97,7 +97,7 @@ function placeEmployees(){
         const firstName = person.firstName;
         const lastName = person.lastName;
         const userName = person.userName;
-        const birthDate = person.birthDate;
+        const birthDate = convertDate(person.birthDate);
         const eMail = person.eMail;
         const department = person.department;
         const maxAmountOfHolidays = person.maxAmountOfHolidays;
@@ -153,4 +153,10 @@ function placeEmployees(){
     appContent.innerHTML = outputApp.join("");
     networkContent.innerHTML = outputNetwork.join("");
     mediaContent.innerHTML = outputMedia.join("");
+}
+
+function convertDate(date){
+    let dateArray = date.split("-");
+    let newDate = dateArray[2] + "." + dateArray[1] + "." + dateArray[0];
+    return newDate;
 }
