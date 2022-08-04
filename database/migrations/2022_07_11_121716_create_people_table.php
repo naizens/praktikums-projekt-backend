@@ -33,27 +33,16 @@ class CreatePeopleTable extends Migration
         });
 
         (new Person([
-            "userName"              => 'admin',
-            "eMail"                 => 'heide@netzfactor.de',
+            "userName"              => 'j.muschiol',
+            "eMail"                 => 'muschiol@netzfactor.de',
             "password"              => Hash::make('1234'),
-            "firstName"             => 'Niclas',
-            "lastName"              => 'Heide',
-            "birthDate"             => '2000-29-09',
-            "department"            => 'web',
+            "firstName"             => 'Jörg',
+            "lastName"              => 'Muschiol',
+            "birthDate"             => '1984-01-05',
+            "department"            => 'nf',
             "maxAmountOfHolidays"   => 28,
             "admin"                 => true,
 
-        ]))->save();
-        (new Person([
-            "userName"              => 'test',
-            "eMail"                 => 'test@test.com',
-            "password"              => Hash::make('1234'),
-            "firstName"             => 'Test',
-            "lastName"              => 'Name',
-            "birthDate"             => '2000-29-09',
-            "department"            => 'media',
-            "maxAmountOfHolidays"   => 30,
-            "admin"                 => false,
         ]))->save();
     }
 
