@@ -7,4 +7,5 @@ Homestead.yaml
 /resources/views/test.html
 .phpunit.result.cache
 database/database.sqlite
-storage/framework/sessions*
+storage/framework/sessions/*
+!storage/framework/sessions/.gitempty
