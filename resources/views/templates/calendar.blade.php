@@ -160,6 +160,13 @@
         <div class="flex mx-1 mb-2 p-1 bg-slate-100 rounded-md border border-slate-300 font-semibold">
             <div class="flex m-1 border-r border-slate-300 bg-green-200">
                 <div class="mx-1">
+                    Verbleibende Urlaubstage:
+                </div>
+                <div id="remainingDays" class="mx-1">
+                </div>
+            </div>
+            <div class="flex m-1 border-r border-slate-300 bg-green-200">
+                <div class="mx-1">
                     Gebuchte Urlaubstage:
                 </div>
                 <div id="bookedDays" class="mx-1">
@@ -167,9 +174,9 @@
             </div>
             <div class="flex m-1 border-r border-slate-300 bg-green-200">
                 <div class="mx-1">
-                    Verbleibende Urlaubstage:
+                    Beantragte Urlaubstage:
                 </div>
-                <div id="remainingDays" class="mx-1">
+                <div id="registeredDays" class="mx-1">
                 </div>
             </div>
         </div>

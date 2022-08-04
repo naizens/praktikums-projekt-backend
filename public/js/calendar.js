@@ -150,7 +150,7 @@ halfDayRadio.forEach((input) =>{
 const addButton = document.querySelector(".addButton");
 addButton.addEventListener("click", addEvent);
 
-function calculateHoliday(currentYear, year){
+function calculateHoliday(){
     let holidayCount = holidays.reduce(function(previous, current){
         if(current.status === "registered") {
             return previous;
@@ -160,8 +160,22 @@ function calculateHoliday(currentYear, year){
         }
         return previous + workingDaysBetweenDates(current.start, current.end , true);
     }, 0);
+
+    let registeredHolidayCount = holidays.reduce(function(previous, current){
+        if(current.status === "accepted") {
+            return previous;
+        }
+        if(current.type === "halfDay"){
+            return previous + 0.5;
+        }
+        return previous + workingDaysBetweenDates(current.start, current.end , true);
+    }, 0);
+
+
     let bookedDays = document.getElementById("bookedDays");
     bookedDays.innerHTML = holidayCount;
+    let registeredDays = document.getElementById("registeredDays");
+    registeredDays.innerHTML = registeredHolidayCount;
 
     let restHolidaysOfYear = window.currentUser.maxAmountOfHolidays + window.currentUser.holidaysOfPreviousYear - holidayCount
     let remainingDays = document.getElementById("remainingDays");
