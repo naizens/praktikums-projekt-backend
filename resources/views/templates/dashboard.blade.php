@@ -86,6 +86,9 @@
             </div>
         </div>
     </div>
+    <div class="mx-4 py-4">
+        <iframe id="toiletIframe" class="w-1/6 h-24 rounded-md overflow-hidden" src="http://proklo-widget.nf.docker/" title="Toilettenstatus"></iframe>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script type="text/javascript" async src="/js/dashboard.js"></script>
 </main>
