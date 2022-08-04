@@ -7,13 +7,7 @@
 @section('content')
     <header class="z-20 h-20 flex bg-white items-center justify-between border-b border-gray-200 py-4 px-6 lg:flex-none">
         <div class="items-center">
-            <h1 class="text-2xl font-semibold text-gray-900 border-b border-gray-300">
-                <time id="month"></time>
-            </h1>
-            <h2 id="user" class="text-lg font-semibold text-gray-900"></h2>
-        </div>
-        <div class="text-3xl font-semibold text-slate-600">
-            Mitarbeiter
+            <h1 class="text-2xl font-semibold text-gray-900 border-b border-gray-300">Mitarbeiterverwaltung</h1>
         </div>
         <div class="flex items-center">
             <div class="flex items-center shadow-md rounded-md md:items-stretch ">
@@ -134,6 +128,32 @@
                     <div id="webHeader" class="flex items-center p-2 w-full">
                         <div class="text-center text-xl font-medium text-slate-600 w-full">
                             [NF]-WEB
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-8 text-center font-semibold divide-x divide-slate-400/20">
+                        <div>
+                            Vorname
+                        </div>
+                        <div>
+                            Nachname
+                        </div>
+                        <div>
+                            Username
+                        </div>
+                        <div>
+                            E-Mail
+                        </div>
+                        <div>
+                            Geburtstag
+                        </div>
+                        <div>
+                            Maximaler Urlaub
+                        </div>
+                        <div>
+                            Restlicher Urlaub
+                        </div>
+                        <div>
+                            Urlaub aus dem Vorjahr
                         </div>
                     </div>
                     <div id="webContent" class="divide-y divide-slate-400/20">
