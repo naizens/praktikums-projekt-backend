@@ -404,7 +404,7 @@ async function placeDays(monthIndex, year) {
         const isWeekEnd = startDate.getDay() === 6 || startDate.getDay() === 0;
         // Die folgende Funktion "übersetzt" das aktuelle Date-Object auf Österreichisch (um die Kollegen zu ärgern).
         // Intl.DateTimeFormat -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
-        const dayFormat = new Intl.DateTimeFormat('de-AT', {
+        const dayFormat = new Intl.DateTimeFormat('de', {
             day: 'numeric',
         }).format(startDate);
         let events;
