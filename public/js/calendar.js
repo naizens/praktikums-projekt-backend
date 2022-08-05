@@ -307,7 +307,7 @@ async function loadEvents(startDate) {
     });
     // Loop through all Holidays in the Database
     allHolidays.forEach(function(entry) {
-        const department = entry.person.department;
+        let department = entry.person.department;
         const firstName = entry.person.firstName;
         const lastName = entry.person.lastName;
         initials = entry.person.firstName.charAt(0) + entry.person.lastName.charAt(0);
@@ -317,6 +317,17 @@ async function loadEvents(startDate) {
         const holidayType = entry.type;
         const status = entry.status;
         const dayTime = entry.daytime;
+        if(department === "web"){
+            department = "before:bg-web";
+        } else if(department === "app"){
+            department = "before:bg-app";
+        } else if(department === "network"){
+            department = "before:bg-network";
+        } else if(department === "media"){
+            department = "before:bg-media";
+        } else {
+            department = "before:bg-netzfactor";
+        }
         let bgColor = "bg-slate-50";
         let opacity = "opacity-50";
         // If the currentdate is between the start and end date do the following
@@ -336,7 +347,7 @@ async function loadEvents(startDate) {
         if(currentDate >= start && currentDate <= end) {
             output.push(
                 `
-                <div data-initials="${initials + firstName + lastName}" class="before:content-[''] ${opacity} before:rounded-full before:block before:w-2 before:h-7 before:bg-${department} before:mr-2
+                <div data-initials="${initials + firstName + lastName}" class="before:content-[''] ${opacity} before:rounded-full before:block before:w-2 before:h-7 ${department} before:mr-2
                 m-1 flex min-w-[55px] min-h-[34px] justify-center justify-self-center text-netzfactor font-bold ${bgColor} bg-auto px-1 py-0.5 rounded-md  scale-75 shadow-md
                 hover-event relative hover:scale-100 border border-solid md:scale-100">
                     <div class="flex text-lg">${initials}</div>
@@ -442,8 +453,8 @@ async function placeDays(monthIndex, year) {
                             </div>
                         </div>
                         <div class="flex flex-wrap justify-evenly py-1 break-words mx-1">
-                            ${events? events.join(""): ""}
                             <div class="w-full text-center font-semibold text-slate-600 my-1 bg-green-200 rounded-md">${isHoliday}</div>
+                            ${events? events.join(""): ""}
                         </div>
                     </div>
                     `

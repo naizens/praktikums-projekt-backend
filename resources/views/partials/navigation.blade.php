@@ -90,7 +90,12 @@
                                             md:bottom-10 md:ml-20">
                     <div class="p-1 my-1 grid justify-center w-72">
                         <div class="p-1 self-center justify-self-center">
+                            <div id="profilePicture" class="flex h-36 w-36 rounded-full ring-2 ring-offset-2 place-content-center bg-slate-400 overflow-hidden">
+                                <div class=" text-center text-5xl font-bold self-center mb-2 text-white">NH</div>
+                            </div>
+                            <!--
                             <img id="profilePicture" class="h-36 w-36 rounded-full ring-2 ring-offset-2" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                            -->
                         </div>
                         <div class="p-1 my-1 justify-self-center text-center">
                             <h1 id="name" class="text-xl font-bold">{{$user->firstName}} {{$user->lastName}}</h1>
