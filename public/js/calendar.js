@@ -156,7 +156,15 @@ function calculateHoliday(){
             return previous;
         }
         if(current.type === "halfDay"){
-            return previous + 0.5;
+            let difference = Math.abs(new Date(current.end) - new Date(current.start));
+            let differenceInDays = difference / (1000 * 3600 * 24);
+            if(differenceInDays > 1){
+                while(differenceInDays > 1){
+                    differenceInDays--;
+                    previous += 0.5;
+                }
+            }
+            return previous;
         }
         return previous + workingDaysBetweenDates(current.start, current.end , true);
     }, 0);
@@ -166,7 +174,15 @@ function calculateHoliday(){
             return previous;
         }
         if(current.type === "halfDay"){
-            return previous + 0.5;
+            let difference = Math.abs(new Date(current.end) - new Date(current.start));
+            let differenceInDays = difference / (1000 * 3600 * 24);
+            if(differenceInDays > 1){
+                while(differenceInDays > 1){
+                    differenceInDays--;
+                    previous += 0.5;
+                }
+            }
+            return previous;
         }
         return previous + workingDaysBetweenDates(current.start, current.end , true);
     }, 0);
