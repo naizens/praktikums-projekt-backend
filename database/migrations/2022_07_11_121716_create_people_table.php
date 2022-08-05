@@ -27,7 +27,7 @@ class CreatePeopleTable extends Migration
             $table->string("department");
             $table->boolean("admin")->default(false);
             $table->integer("maxAmountOfHolidays");
-            $table->integer("holidaysOfPreviousYear")->nullable();
+            $table->integer("holidaysOfPreviousYear")->nullable()->default(0);
             $table->integer("restHolidays")->nullable();
             $table->timestamps();
         });
